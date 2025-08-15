@@ -7,11 +7,5 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    /**
-     * customer dashboard
-     */
-    public function index()
-    {
-        return ('user dashboard');
-    }
+
 }

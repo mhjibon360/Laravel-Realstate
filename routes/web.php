@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Frontend\UserConroller;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -24,12 +25,9 @@ require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::controller(FrontendController::class)->group(function () {
+    Route::controller(UserConroller::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
-    });
-
-
-    Route::controller(BackendController::class)->group(function () {
-        Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+        Route::get('/edit/profile', 'edit')->name('edit.profile');
+        Route::put('/update/profile', 'update')->name('update.profile');
     });
 });

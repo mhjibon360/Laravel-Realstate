@@ -25,6 +25,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // backend controller all routes
     Route::controller(BackendController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('/edit/profile', 'edit')->name('edit.profile');
+        Route::put('/update/profile', 'update')->name('update.profile');
     });
 
     // banneer controler all routes
