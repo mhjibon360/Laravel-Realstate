@@ -7,5 +7,11 @@ use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
-    //
+    /**
+     * admin dashboard
+     */
+    public function index()
+    {
+        return ('agent dashboard');
+    }
 }

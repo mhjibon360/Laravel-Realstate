@@ -7,5 +7,11 @@ use Illuminate\Http\Request;
 
 class BackendController extends Controller
 {
-    //
+    /**
+     * admin dashboard
+     */
+    public function index()
+    {
+        return ('admin dashboard');
+    }
 }
