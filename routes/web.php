@@ -28,9 +28,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
     });
 
-    Route::controller(AgentController::class)->group(function () {
-        Route::get('/agent/dashboard', 'index')->name('agent.dashboard');
-    });
 
     Route::controller(BackendController::class)->group(function () {
         Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
