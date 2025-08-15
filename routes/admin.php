@@ -21,6 +21,10 @@ use App\Http\Controllers\Backend\PropertyCategoryController;
 
 require __DIR__ . '/auth.php';
 
+Route::controller(BackendController::class)->group(function () {
+    Route::get('/login', 'adminlogin')->name('admin.logint');
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // backend controller all routes
     Route::controller(BackendController::class)->group(function () {
