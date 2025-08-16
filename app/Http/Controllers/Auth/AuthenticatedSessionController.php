@@ -28,7 +28,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if ($request->user()->role == 'admin') {
+            notyf()->success('Welcome back ' . $request->user()->name);
+            return redirect()->route('admin.dashboard');
+        } elseif ($request->user()->role == 'agent') {
+            notyf()->success('Welcome back ' . $request->user()->name);
+            return redirect()->route('agent.dashboard');
+        } else {
+            notyf()->success('Welcome back ' . $request->user()->name);
+            return redirect()->route('dashboard');
+        }
+
+        // return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
@@ -41,7 +52,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
+        notyf()->warning('Logout success');
         return redirect('/');
     }
 }

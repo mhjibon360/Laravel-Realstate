@@ -22,15 +22,19 @@ use App\Http\Controllers\Backend\PropertyCategoryController;
 require __DIR__ . '/auth.php';
 
 Route::controller(BackendController::class)->group(function () {
-    Route::get('/login', 'adminlogin')->name('admin.logint');
+    Route::get('/login', 'adminlogin')->name('logint');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // backend controller all routes
     Route::controller(BackendController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
-        Route::get('/edit/profile', 'edit')->name('edit.profile');
-        Route::put('/update/profile', 'update')->name('update.profile');
+        Route::get('/edit/profile', 'editprofile')->name('edit.profile');
+        Route::put('/update/profile', 'updateprofile')->name('update.profile');
+
+        Route::get('/change/password', 'changepassword')->name('change.password');
+        Route::put('/update/password', 'updatepassword')->name('update.password');
+        Route::post('/logout', 'adminlogout')->name('logout');
     });
 
     // banneer controler all routes
