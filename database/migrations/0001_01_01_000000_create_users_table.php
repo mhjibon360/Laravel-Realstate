@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->longText('details')->nullable();
+            $table->string('cover_photo')->nullable();
             $table->string('credit')->default('0');
             $table->string('profession')->nullable();
             $table->longText('facebook')->nullable();

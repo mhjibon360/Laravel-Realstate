@@ -23,6 +23,8 @@ require __DIR__ . '/auth.php';
 
 Route::controller(BackendController::class)->group(function () {
     Route::get('/login', 'adminlogin')->name('logint');
+    Route::get('/forgot-password', 'forgotpassword')->name('forgot.password');
+    Route::get('/reset-password/{token}', 'resetpassword')->name('reset.password');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
