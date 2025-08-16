@@ -27,7 +27,7 @@ Route::controller(BackendController::class)->group(function () {
     Route::get('/reset-password/{token}', 'resetpassword')->name('reset.password');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified','role:admin'])->group(function () {
     // backend controller all routes
     Route::controller(BackendController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
