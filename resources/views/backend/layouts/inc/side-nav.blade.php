@@ -72,9 +72,10 @@
                     </ul>
                 </div>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#location" role="button"
-                    aria-expanded="false" aria-controls="location">
+                <a class="nav-link" data-bs-toggle="collapse" href="#location" role="button" aria-expanded="false"
+                    aria-controls="location">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title"> Manage Location</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -88,6 +89,27 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.location.index') }}" class="nav-link">
                                 All Location</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#propertytype" role="button" aria-expanded="false"
+                    aria-controls="propertytype">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title"> Poroperty Type</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="propertytype">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property-type.create') }}" class="nav-link">
+                                Add Poroperty Type</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property-type.index') }}" class="nav-link">
+                                All Poroperty Type</a>
                         </li>
                     </ul>
                 </div>

@@ -74,7 +74,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('/property-category', PropertyCategoryController::class);
 
     // property type all routes
-    Route::resource('/property/type', PropertytypeController::class);
+    Route::resource('/property-type', PropertytypeController::class);
 
     // location all routes
     Route::resource('/location', LocationController::class);
@@ -94,11 +94,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
 
     // blogpost all routes
-    Route::resource('/blog/post', BlogPostController::class);
+    Route::resource('/blog-post', BlogPostController::class);
 
     // blogcategory all routes
-    Route::resource('/blog/category', BlogCategoryController::class);
+    Route::resource('/blog-category', BlogCategoryController::class);
 
     // blogtag all routes
-    Route::resource('/blog/tag', BlogTagController::class);
+    Route::resource('/blog-tag', BlogTagController::class);
 });
