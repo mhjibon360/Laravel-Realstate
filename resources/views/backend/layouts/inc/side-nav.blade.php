@@ -30,7 +30,7 @@
                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false"
                     aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
-                    <span class="link-title">Email</span>
+                    <span class="link-title"> E-mail</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="emails">
@@ -50,6 +50,27 @@
                     <i class="link-icon" data-feather="calendar"></i>
                     <span class="link-title">Calendar</span>
                 </a>
+            </li>
+            <li class="nav-item nav-category">property</li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#propertycategory" role="button"
+                    aria-expanded="false" aria-controls="propertycategory">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title"> Property-category</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="propertycategory">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property-category.create') }}" class="nav-link">
+                                Add Property-category</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property-category.index') }}" class="nav-link">
+                                All Property-category</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>

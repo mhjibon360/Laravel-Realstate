@@ -27,7 +27,7 @@ Route::controller(BackendController::class)->group(function () {
     Route::get('/reset-password/{token}', 'resetpassword')->name('reset.password');
 });
 
-Route::middleware(['auth', 'verified','role:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // backend controller all routes
     Route::controller(BackendController::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
@@ -57,8 +57,7 @@ Route::middleware(['auth', 'verified','role:admin'])->group(function () {
         Route::put('/update/video', 'updatevideo')->name('update.video');
     });
 
-    // floor plan all routes
-    Route::resource('/floor/plan', FloorplanController::class);
+
 
     // why choose us item all routes
     Route::resource('/choose/us', ChooseusController::class);
@@ -72,7 +71,7 @@ Route::middleware(['auth', 'verified','role:admin'])->group(function () {
 
 
     // property category all routes
-    Route::resource('/property/category', PropertyCategoryController::class);
+    Route::resource('/property-category', PropertyCategoryController::class);
 
     // property type all routes
     Route::resource('/property/type', PropertytypeController::class);
@@ -88,6 +87,9 @@ Route::middleware(['auth', 'verified','role:admin'])->group(function () {
 
     // nearby all routes
     Route::resource('/nearby', NearbyController::class);
+
+    // floor plan all routes
+    Route::resource('/floor/plan', FloorplanController::class);
 
 
 
