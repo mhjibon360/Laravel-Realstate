@@ -1,9 +1,9 @@
 @extends('backend.layouts.backend-master')
-@section('title', 'edit property category')
+@section('title', 'edit location')
 @section('content')
     <nav class="page-breadcrumb ">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript::void();">Property-Category</a></li>
+            <li class="breadcrumb-item"><a href="javascript::void();">Location</a></li>
             <li class="breadcrumb-item active" aria-current="page">edit</li>
         </ol>
     </nav>
@@ -13,40 +13,57 @@
             <div class="row">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h4 class=" text-capitalize fw-semibold">Edit Property-category</h4>
+                        <h4 class=" text-capitalize fw-semibold">Edit location</h4>
                         <hr>
-                        <form action="{{ route('admin.property-category.update', $pcategory->id) }}" method="post">
+                        <form action="{{ route('admin.location.update', $location->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <!--from group-->
                             <div class="mb-3">
-                                <label for="category_name" class="form-label text-capitalize">Property Category Name</label>
-                                <input type="text" name="category_name" id="category_name"
-                                    class="form-control {{ $errors->has('category_name') ? 'is-invalid' : '' }}"
-                                    value="{{ $pcategory->category_name }}" />
-                                @error('category_name')
+                                <label for="location_name" class="form-label text-capitalize">Location Name</label>
+                                <input type="text" name="location_name" id="location_name"
+                                    class="form-control {{ $errors->has('location_name') ? 'is-invalid' : '' }}"
+                                    value="{{ $location->location_name }}" />
+                                @error('location_name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            <!--from group-->
+
                             <div class="mb-3">
-                                <label for="category_icon" class="form-label text-capitalize">Icon(only class)</label>
-                                <input type="text" name="category_icon" id="category_icon"
-                                    class="form-control {{ $errors->has('category_icon') ? 'is-invalid' : '' }}"
-                                    value="{{ $pcategory->category_icon }}" />
-                                @error('category_icon')
+                                <label for="photo" class="form-label text-capitalize photo">Location Image</label>
+                                <input type="file" name="location_image" id="photo"
+                                    class="form-control {{ $errors->has('location_image') ? 'is-invalid' : '' }}" />
+                                @error('location_image')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                            <img src="{{ asset($location->location_image) }}"
+                                class="mt-2 img-fluid img-thumbnail shadow-sm photo_preview" id="photo_preview"
+                                style="height: 50px;width:50px;" alt="">
+
                             <div class="my-3">
                                 <button type="submit" class=" btn btn-primary">Save Now</button>
                                 <a href="{{ route('admin.dashboard') }}" class="ms-2 btn btn-danger">Cancel</a>
                             </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
         <!-- middle wrapper end -->
+
     </div>
 @endsection
+
+@push('admin_script')
+    <script>
+        $(document).ready(function() {
+            $('#photo').change(function(e) {
+                e.preventDefault();
+                photo_preview.src = URL.createObjectURL(e.target.files[0]);
+            });
+        });
+    </script>
+@endpush

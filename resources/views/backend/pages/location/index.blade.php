@@ -1,9 +1,9 @@
 @extends('backend.layouts.backend-master')
-@section('title', 'all property category')
+@section('title', 'all location')
 @section('content')
     <nav class="page-breadcrumb ">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript::void();">Property-Category</a></li>
+            <li class="breadcrumb-item"><a href="javascript::void();">Location</a></li>
             <li class="breadcrumb-item active" aria-current="page">list</li>
         </ol>
     </nav>
@@ -13,30 +13,34 @@
             <div class="row">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h5 class="card-title text-capitalize ">List of property category</h5>
+                        <h5 class="card-title text-capitalize ">List of location</h5>
                         <hr>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
                                 <thead>
                                     <tr>
                                         <th>Si</th>
-                                        <th>Property Category Name</th>
-                                        <th>Icon</th>
+                                        <th>Location Name</th>
+                                        <th>Image</th>
                                         <th>Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($allpcategory as $item)
+                                    @foreach ($alllocation as $item)
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
-                                            <td>{{ $item->category_name }}</td>
-                                            <td>{{ $item->category_icon }}</td>
+                                            <td>{{ $item->location_name }}</td>
+                                            <td>
+                                                <img src="{{ asset($item->location_image) }}"
+                                                    style="height: 50px;width:50px;" class=" img-fluid img-thumbnail"
+                                                    alt="">
+                                            </td>
                                             <td>{{ $item->created_at->format('Y/M/d') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.property-category.edit', $item->id) }}"
+                                                <a href="{{ route('admin.location.edit', $item->id) }}"
                                                     class="btn btn-inverse-warning mb-1 mb-md-0">Edit</a>
-                                                <form action="{{ route('admin.property-category.destroy', $item->id) }}"
+                                                <form action="{{ route('admin.location.destroy', $item->id) }}"
                                                     method="post" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')

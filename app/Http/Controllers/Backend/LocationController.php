@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Location;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LocationController extends Controller
 {
@@ -12,7 +14,8 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        $alllocation = Location::orderBy('id', 'asc')->get();
+        return view('backend.pages.location.index', compact('alllocation'));
     }
 
     /**
@@ -20,7 +23,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.location.create');
     }
 
     /**
@@ -28,23 +31,43 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return($request->all());
+        // validate
+        $request->validate([
+            'location_image' => 'required',
+            'location_name' => 'required|string|unique:locations,location_name',
+        ]);
+
+        //upload image
+        if ($request->hasFile('location_image')) {
+            $location_image = $request->file('location_image');
+            $name = hexdec(uniqid()) . '.' . $location_image->getClientOriginalExtension();
+            $url = "upload/location/" . $name;
+            $location_image->move(public_path("upload/location/"), $name);
+        }
+
+        //store data
+        Location::create([
+            'location_image' =>  $url,
+            'location_name' => $request->location_name,
+            'location_slug' => Str::slug($request->location_name),
+            'created_at' => now(),
+        ]);
+
+        // notification
+        notyf()->success('Data store success');
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $location = Location::findOrFail($id);
+        return view('backend.pages.location.edit', compact('location'));
     }
 
     /**
@@ -52,7 +75,37 @@ class LocationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $location = Location::findOrFail($id);
+
+        // validate
+        $request->validate([
+            'location_image' => 'nullable',
+            'location_name' => 'required|string|unique:locations,location_name,' . $id,
+        ]);
+
+        //upload image
+        if ($request->hasFile('location_image')) {
+            $location_image = $request->file('location_image');
+            $name = hexdec(uniqid()) . '.' . $location_image->getClientOriginalExtension();
+            $url = "upload/location/" . $name;
+            $location_image->move(public_path("upload/location/"), $name);
+            // unlink
+            if (file_exists($location->location_image)) {
+                @unlink($location->location_image);
+            }
+        }
+
+        //store data
+        $location->update([
+            'location_image' =>  isset($url) ? $url : $location->location_image,
+            'location_name' => $request->location_name,
+            'location_slug' => Str::slug($request->location_name),
+            'updated_at' => now(),
+        ]);
+
+        // notification
+        notyf()->info('Data update success');
+        return redirect()->route('admin.location.index');
     }
 
     /**
@@ -60,6 +113,15 @@ class LocationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $location = Location::findOrFail($id);
+        // unlink
+        if (file_exists($location->location_image)) {
+            @unlink($location->location_image);
+        }
+        // delete
+        $location->delete();
+        // notification
+        notyf()->warning('Data delete success');
+        return back();
     }
 }

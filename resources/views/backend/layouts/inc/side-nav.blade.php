@@ -72,6 +72,26 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#location" role="button"
+                    aria-expanded="false" aria-controls="location">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title"> Manage Location</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="location">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.location.create') }}" class="nav-link">
+                                Add Location</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.location.index') }}" class="nav-link">
+                                All Location</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
