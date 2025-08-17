@@ -162,7 +162,11 @@ class PropertyController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $allpcategory = PropertyCategory::all();
+        $alllocation = Location::all();
+        $allpropertytype = Propertytype::all();
+        $property = Property::findOrFail($id);
+        return view('backend.pages.property.edit', compact(['allpcategory', 'alllocation', 'allpropertytype', 'property']));
     }
 
     /**

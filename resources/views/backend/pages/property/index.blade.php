@@ -21,6 +21,7 @@
                                     <tr>
                                         <th>Si</th>
                                         <th>Property Name</th>
+                                        <th>Thumbnail</th>
                                         <th>Buy/Rent</th>
                                         <th>Price/Discount</th>
                                         <th>Hot</th>
@@ -35,6 +36,9 @@
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>{{ $item->property_name }}</td>
+                                            <td>
+                                                <img src="{{ asset($item->thumbnail) }}" class=" img-fluid img-thumbnail" style="height: 60px;width:60px;" alt="">
+                                            </td>
                                             <td>
                                                 @if ($item->buy_rent_type == 'buy')
                                                     <span class="badge bg-primary">Buy</span>
@@ -72,7 +76,7 @@
                                             </td>
                                             <td>{{ $item->created_at->format('d-M-Y') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.property-category.edit', $item->id) }}"
+                                                <a href="{{ route('admin.property.edit', $item->id) }}"
                                                     class="btn btn-inverse-warning mb-1 mb-md-0"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
                                                 <form action="{{ route('admin.property-category.destroy', $item->id) }}"
