@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/flatpickr/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css">
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/dropify/dist/dropify.min.css">
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/fileUpload.css') }}">
+
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -91,7 +96,12 @@
     <script src="{{ asset('backend') }}/assets/vendors/flatpickr/flatpickr.min.js"></script>
     <script src="{{ asset('backend') }}/assets/vendors/datatables.net/jquery.dataTables.js"></script>
     <script src="{{ asset('backend') }}/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js"></script>
-     <script src="{{ asset('backend') }}/assets/vendors/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/tinymce/tinymce.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/dropify/dist/dropify.min.js"></script>
+
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->
@@ -104,7 +114,16 @@
     <!-- End custom js for this page -->
     <script src="{{ asset('backend') }}/assets/js/data-table.js"></script>
     <script src="{{ asset('backend') }}/assets/js/sweet-alert.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/tags-input.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/select2.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/tinymce.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/dropify.js"></script>
+
+
+
+
     @stack('admin_script')
+
 </body>
 
 </html>

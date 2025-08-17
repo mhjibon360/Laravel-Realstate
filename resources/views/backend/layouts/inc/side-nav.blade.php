@@ -114,6 +114,37 @@
                     </ul>
                 </div>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#property" role="button" aria-expanded="false"
+                    aria-controls="property">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Manage Poroperty </span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="property">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property.create') }}" class="nav-link">
+                                Add Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property.index') }}" class="nav-link">
+                                All Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                Active Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                Deactive Poroperty </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
         </ul>
     </div>
 </nav>
