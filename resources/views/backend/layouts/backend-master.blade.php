@@ -17,7 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- End fonts -->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/core/core.css">
     <!-- endinject -->
@@ -30,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/select2/select2.min.css">
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendors/dropify/dist/dropify.min.css">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/fileUpload.css') }}">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
     <!-- End plugin css for this page -->
 
@@ -44,7 +47,7 @@
 
     <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.png" />
     @stack('admin_style')
-
+    @routes
 </head>
 
 <body>
@@ -101,6 +104,8 @@
     <script src="{{ asset('backend') }}/assets/vendors/select2/select2.min.js"></script>
     <script src="{{ asset('backend') }}/assets/vendors/tinymce/tinymce.min.js"></script>
     <script src="{{ asset('backend') }}/assets/vendors/dropify/dist/dropify.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 
     <!-- End plugin js for this page -->
 
@@ -118,7 +123,6 @@
     <script src="{{ asset('backend') }}/assets/js/select2.js"></script>
     <script src="{{ asset('backend') }}/assets/js/tinymce.js"></script>
     <script src="{{ asset('backend') }}/assets/js/dropify.js"></script>
-
 
 
 

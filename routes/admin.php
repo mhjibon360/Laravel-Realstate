@@ -80,6 +80,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('/location', LocationController::class);
 
     // property all routes
+    Route::controller(PropertyController::class)->group(function () {
+        Route::get('/change/hot/property/status', 'hotproperty')->name('hot.property.status');
+        Route::get('/change/featured/property/status', 'featuredproperty')->name('featured.property.status');
+        Route::get('/change/property/status', 'propertystatus')->name('property.status');
+    });
     Route::resource('/property', PropertyController::class);
 
     // multi iamge all routes

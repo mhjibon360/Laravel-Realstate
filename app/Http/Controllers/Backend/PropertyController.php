@@ -20,7 +20,8 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        //
+        $allproperty = Property::all();
+        return view('backend.pages.property.index', compact('allproperty'));
     }
 
     /**
@@ -178,5 +179,77 @@ class PropertyController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * hot property status change
+     */
+    public function hotproperty(Request $request)
+    {
+        $property = Property::findOrFail($request->id);
+
+        if ($property->hot_property == 1) {
+            $property->update([
+                'hot_property' => 0,
+            ]);
+            return response()->json([
+                'success' => 'Hot property Deactive success',
+            ]);
+        } else {
+            $property->update([
+                'hot_property' => 1,
+            ]);
+            return response()->json([
+                'success' => 'Hot property Active success',
+            ]);
+        }
+    }
+
+    /**
+     * featured property status change
+     */
+    public function featuredproperty(Request $request)
+    {
+        $property = Property::findOrFail($request->id);
+
+        if ($property->featured_property == 1) {
+            $property->update([
+                'featured_property' => 0,
+            ]);
+            return response()->json([
+                'success' => 'Featured property Deactive success',
+            ]);
+        } else {
+            $property->update([
+                'featured_property' => 1,
+            ]);
+            return response()->json([
+                'success' => 'Featured property Active success',
+            ]);
+        }
+    }
+
+    /**
+     *  property status change
+     */
+    public function propertystatus(Request $request)
+    {
+        $property = Property::findOrFail($request->id);
+
+        if ($property->status == 1) {
+            $property->update([
+                'status' => 0,
+            ]);
+            return response()->json([
+                'success' => ' property Status Deactive success',
+            ]);
+        } else {
+            $property->update([
+                'status' => 1,
+            ]);
+            return response()->json([
+                'success' => ' property Status Active success',
+            ]);
+        }
     }
 }
