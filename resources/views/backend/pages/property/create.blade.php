@@ -477,8 +477,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="hot_property"
-                                            value="1">
+                                        <input type="checkbox" class="form-check-input" name="hot_property"
+                                            id="hot_property" value="1">
                                         <label class="form-check-label" for="hot_property">
                                             Hot Property
                                         </label>
@@ -486,8 +486,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="featured_property"
-                                            value="1">
+                                        <input type="checkbox" class="form-check-input" name="featured_property"
+                                            id="featured_property" value="1">
                                         <label class="form-check-label" for="featured_property">
                                             Featured Property
                                         </label>

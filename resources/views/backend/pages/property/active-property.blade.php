@@ -1,5 +1,5 @@
 @extends('backend.layouts.backend-master')
-@section('title', 'all property list')
+@section('title', 'all active property list')
 @section('content')
     <nav class="page-breadcrumb ">
         <ol class="breadcrumb">
@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h5 class="card-title text-capitalize ">List of property </h5>
+                        <h5 class="card-title text-capitalize ">List of Active property </h5>
                         <hr>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">

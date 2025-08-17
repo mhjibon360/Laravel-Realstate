@@ -455,22 +455,7 @@
                                     </div>
                                 </div>
                                 <!--from group-->
-                                <div class="col-md-12">
-                                    <div class="mb-3 mt-3">
-                                        <label for="image_name" class="form-label text-capitalize photo">Multiple
-                                            Photo</label>
-                                        {{-- <input type="file" name="image_name[]" multiple> --}}
 
-                                        <div id="drop-area">
-                                            <p>Drag & Drop Files Here</p>
-                                            <p>or click to browse</p>
-                                            <input type="file" id="fileElem" name="image_name[]" multiple>
-                                        </div>
-                                        <div class="preview" id="preview"></div>
-                                    </div>
-
-                                </div>
-                                <hr>
 
                             </div>
                             <hr>
@@ -478,7 +463,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="hot_property" value="1"
+                                        <input type="checkbox" class="form-check-input" id="hot_property" value="1" name="hot_property"
                                             {{ $property->hot_property == '1' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="hot_property">
                                             Hot Property
@@ -487,7 +472,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check mb-3">
-                                        <input type="checkbox" class="form-check-input" id="featured_property"
+                                        <input type="checkbox" class="form-check-input" id="featured_property" name="featured_property"
                                             value="1" {{ $property->featured_property == '1' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="featured_property">
                                             Featured Property
@@ -515,52 +500,52 @@
         <div class="col-md-12 col-xl-12 middle-wrapper">
             <div class="row">
                 <div class="card mt-1">
-                    <div class="card-body">
+                    <h3 class=" my-2">Manage Multi Image Gallery</h3>
+                    <hr>
 
-                        <form action="{{ route('admin.nearby.store') }}" method="post">
-                            @csrf
-                            @method('post')
-                            <input type="hidden" name="pid" value="{{ $property->id }}">
-                            <div class="row">
-                                <hr>
-                                <h3 class=" my-2">What’s Nearby? <button id="btnPlus"
-                                        class="btnPlus btn btn-inverse-light" type="button">Add More</button> </h3>
-
-                                <hr>
-                                <div class=" nearby_holder" id="nearby_holder">
-                                </div>
-                            </div>
-                            <hr>
-
-
-                            <div class="my-3" id="facility_button_group">
-                                <button type="submit" class=" btn btn-primary">Save Now</button>
-                                <a href="{{ route('admin.dashboard') }}" class="ms-2 mt-3 btn btn-danger">Cancel</a>
-                            </div>
-
-                        </form>
-                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>NearyBy Faciity Type</th>
-                                            <th>Faciity Type</th>
+                                            <th>Si</th>
+                                            <th>Image</th>
+                                            <th>Change</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
                                     @php
-                                        $allfaility = App\Models\Nearby::where('property_id', $property->id)->get();
+                                        $allgallery = App\Models\Multiimage::where('product_id', $property->id)->get();
                                     @endphp
                                     <tbody>
-                                        @foreach ($allfaility as $faci)
+                                        @foreach ($allgallery as $gallery)
                                             <tr>
-                                                <td>{{ $faci->nearby_group_name }}</td>
-                                                <td>{{ $faci->nearby_group_title }}</td>
+                                                <td>{{ $loop->index + 1 }}</td>
                                                 <td>
-                                                    <form action="{{ route('admin.nearby.destroy', $faci->id) }}"
+                                                    <img src="{{ asset($gallery->image_name) }}"
+                                                        class=" img-fluid img-thumbnail" style="height: 60px;width:60px;"
+                                                        alt="">
+                                                </td>
+                                                <td>
+                                                    <div class=" d-flex items-center">
+                                                        <form
+                                                            action="{{ route('admin.multiimage.update', $gallery->id) }}"
+                                                            method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PUT')
+
+                                                            <input type="file" name="galleryphoto" id="galleryphoto"
+                                                                class="form-control " data-default-file="" />
+                                                            <button class=" btn btn-info btn-sm">Save</button>
+                                                        </form>
+                                                        @error('galleryphoto')
+                                                            <p class=" text-danger">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('admin.multiimage.destroy', $gallery->id) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
@@ -574,6 +559,39 @@
                             </div>
 
                         </div>
+                    </div>
+                    <hr>
+                    <div class="card-body">
+
+                        <form action="{{ route('admin.multiimage.store') }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('post')
+                            <input type="hidden" name="pid" value="{{ $property->id }}">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3 mt-3">
+                                        <label for="image_name" class="form-label text-capitalize photo">Multiple
+                                            Photo</label>
+                                        <div id="drop-area">
+                                            <p>Drag & Drop Files Here</p>
+                                            <p>or click to browse</p>
+                                            <input type="file" id="fileElem" name="image_name[]" multiple>
+                                        </div>
+                                        <div class="preview" id="preview"></div>
+                                    </div>
+                                </div>
+
+                                <div class="my-3" id="facility_button_group">
+                                    <button type="submit" class=" btn btn-primary">Save Now</button>
+                                    <a href="{{ route('admin.dashboard') }}" class="ms-2 mt-3 btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+
+
+
+
+                        </form>
                     </div>
                 </div>
             </div>

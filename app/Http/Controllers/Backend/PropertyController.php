@@ -20,8 +20,24 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $allproperty = Property::all();
+        $allproperty = Property::latest()->get();
         return view('backend.pages.property.index', compact('allproperty'));
+    }
+    /**
+     * Display a listing of the active property
+     */
+    public function activeproperty()
+    {
+        $allproperty = Property::where('status',1)->latest()->get();
+        return view('backend.pages.property.active-property', compact('allproperty'));
+    }
+    /**
+     * Display a listing of the deactive property
+     */
+    public function deactiveproperty()
+    {
+        $allproperty = Property::where('status',0)->get();
+        return view('backend.pages.property.deactive-property', compact('allproperty'));
     }
 
     /**
@@ -174,7 +190,93 @@ class PropertyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+        $property = Property::findOrFail($id);
+
+        // validate data
+        $request->validate([
+            'property_name' => 'required',
+            'category_id' => 'required',
+            'location_id' => 'required',
+            'propertytype_id' => 'required',
+            'buy_rent_type' => 'required',
+            'price' => 'required',
+            'property_descriptions' => 'required',
+            'property_id' => 'required',
+            'rooms' => 'required',
+            'bedroom' => 'required',
+            'year_build' => 'required',
+            'bath_rooms' => 'required',
+            'property_size' => 'required',
+            'garaze_count' => 'required',
+            // 'thumbnail' => 'required',
+        ]);
+
+
+        //upload thumbnail
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $namethumbnail = hexdec(uniqid()) . '.' . $thumbnail->getClientOriginalExtension();
+            $thumurl = "upload/property/" . $namethumbnail;
+            $thumbnail->move(public_path("upload/property/"), $namethumbnail);
+            //unlink
+            if (file_exists($property->thumbnail)) {
+                @unlink($property->thumbnail);
+            }
+        }
+
+        //upload static graph image
+        if ($request->hasFile('page_statistics_image')) {
+            $page_statistics_image = $request->file('page_statistics_image');
+            $namepage_statistics_image = hexdec(uniqid()) . '.' . $page_statistics_image->getClientOriginalExtension();
+            $staticurl = "upload/property/static/" . $namepage_statistics_image;
+            $page_statistics_image->move(public_path("upload/property/static/"), $namepage_statistics_image);
+            //unlink
+            if (file_exists($property->page_statistics_image)) {
+                @unlink($property->page_statistics_image);
+            }
+        }
+
+        $property->update([
+            'thumbnail' => isset($thumurl) ? $thumurl : $property->thumbnail,
+            'page_statistics_image' => isset($staticurl) ? $staticurl : $property->page_statistics_image,
+            'user_id' => Auth::id(),
+            'category_id' => $request->category_id,
+            'location_id' => $request->location_id,
+            'propertytype_id' => $request->propertytype_id,
+            'property_name' => $request->property_name,
+            'property_slug' => Str::slug($request->property_name),
+            'buy_rent_type' => $request->buy_rent_type,
+            'price' => $request->price,
+            'discount_price' => $request->discount_price,
+            'property_descriptions' => $request->property_descriptions,
+            'property_id' => $request->property_id,
+            'rooms' => $request->rooms,
+            'garage_size' => $request->garage_size,
+            'bedroom' => $request->bedroom,
+            'year_build' => $request->year_build,
+            'bath_rooms' => $request->bath_rooms,
+            'property_size' => $request->property_size,
+            'garaze_count' => $request->garaze_count,
+            'amenities' => $request->amenities,
+            'address' => $request->address,
+            'country' => $request->country,
+            'state_country' => $request->state_country,
+            'neighborhood' => $request->neighborhood,
+            'zip_postal_code' => $request->zip_postal_code,
+            'city' => $request->city,
+            'longitude' => $request->longitude,
+            'latitude' => $request->latitude,
+            'hot_property' => $request->hot_property,
+            'featured_property' => $request->featured_property,
+            'status' => $request->status ? $request->status : '1',
+            'updated_at' => now(),
+        ]);
+
+        // notification
+        notyf()->success('Property update success');
+        return redirect()->route('admin.property.index');
     }
 
     /**
@@ -182,7 +284,31 @@ class PropertyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $property = Property::findOrFail($id);
+
+        // gallery
+        $gallerys = Multiimage::where('product_id', $property->id)->get();
+        foreach ($gallerys as $gallery) {
+            if (file_exists($gallery->image_name)) {
+                @unlink($gallery->image_name);
+            }
+            // delete multi image gallery row
+            $gallery->delete();
+        }
+
+        // nearyby facility delete
+        $facilities = Nearby::where('property_id', $property->id)->get();
+        foreach ($facilities as $faci) {
+            // delete nearby all belongs this property
+            $faci->delete();
+        }
+
+        // delete property row
+        $property->delete();
+
+        // notification
+        notyf()->warning('Property delete success');
+        return redirect()->route('admin.property.index');
     }
 
     /**

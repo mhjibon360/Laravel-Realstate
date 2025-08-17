@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\ChooseUs;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ChooseusController extends Controller
 {
@@ -12,7 +14,8 @@ class ChooseusController extends Controller
      */
     public function index()
     {
-        //
+        $allpchooseus = ChooseUs::orderBy('id', 'asc')->get();
+        return view('backend.pages.chooseus.index', compact('allpchooseus'));
     }
 
     /**
@@ -20,7 +23,7 @@ class ChooseusController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.chooseus.create');
     }
 
     /**
@@ -28,23 +31,35 @@ class ChooseusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate([
+            'icon' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+        ]);
+
+        //store data
+        ChooseUs::create([
+            'icon' => $request->icon,
+            'title' => $request->title,
+            'details' => $request->details,
+            'created_at' => now(),
+        ]);
+
+        // notification
+        notyf()->success('Data store success');
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $choose = ChooseUs::findOrFail($id);
+        return view('backend.pages.chooseus.edit', compact('choose'));
     }
 
     /**
@@ -52,7 +67,24 @@ class ChooseusController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate
+        $request->validate([
+            'icon' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+        ]);
+
+        //store data
+        ChooseUs::where('id', $id)->update([
+            'icon' => $request->icon,
+            'title' => $request->title,
+            'details' => $request->details,
+            'updated_at' => now(),
+        ]);
+
+        // notification
+        notyf()->info('Data update success');
+        return redirect()->route('admin.us.index');
     }
 
     /**
@@ -60,6 +92,9 @@ class ChooseusController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        ChooseUs::findOrFail($id)->delete();
+        // notification
+        notyf()->warning('Data delete success');
+        return back();
     }
 }

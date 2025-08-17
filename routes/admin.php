@@ -66,6 +66,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('/platform', PlatformController::class);
 
     // testimonial all routes
+    Route::controller(TestimonialController::class)->group(function () {
+        Route::get('/testimonial/status', 'testimonialstatus')->name('testimonial.status');
+    });
     Route::resource('/testimonial', TestimonialController::class);
 
 
@@ -81,6 +84,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     // property all routes
     Route::controller(PropertyController::class)->group(function () {
+        Route::get('/active/property', 'activeproperty')->name('active.property');
+        Route::get('/deactive/property', 'deactiveproperty')->name('deactive.property');
         Route::get('/change/hot/property/status', 'hotproperty')->name('hot.property.status');
         Route::get('/change/featured/property/status', 'featuredproperty')->name('featured.property.status');
         Route::get('/change/property/status', 'propertystatus')->name('property.status');

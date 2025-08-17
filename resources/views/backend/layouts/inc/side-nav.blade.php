@@ -26,20 +26,45 @@
                     <span class="link-title">Manage Banner</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.manage.video') }}" class="nav-link">
+                    <i class="link-icon" data-feather="message-square"></i>
+                    <span class="link-title">Manage Video</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false"
                     aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
-                    <span class="link-title"> E-mail</span>
+                    <span class="link-title"> Testimonial</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="pages/email/inbox.html" class="nav-link">Inbox</a>
+                            <a href="{{ route('admin.testimonial.create') }}" class="nav-link">Add Testimonial</a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/email/read.html" class="nav-link">Read</a>
+                            <a href="{{ route('admin.testimonial.index') }}" class="nav-link">All Testimonial</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#choose" role="button" aria-expanded="false"
+                    aria-controls="choose">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title"> Choose us</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="choose">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.us.create') }}" class="nav-link">Add Choose us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.us.index') }}" class="nav-link">All Choose us</a>
                         </li>
                     </ul>
                 </div>
@@ -95,8 +120,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#propertytype" role="button" aria-expanded="false"
-                    aria-controls="propertytype">
+                <a class="nav-link" data-bs-toggle="collapse" href="#propertytype" role="button"
+                    aria-expanded="false" aria-controls="propertytype">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title"> Poroperty Type</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -133,11 +158,11 @@
                                 All Poroperty </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('admin.active.property') }}" class="nav-link">
                                 Active Poroperty </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('admin.deactive.property') }}" class="nav-link">
                                 Deactive Poroperty </a>
                         </li>
                     </ul>
