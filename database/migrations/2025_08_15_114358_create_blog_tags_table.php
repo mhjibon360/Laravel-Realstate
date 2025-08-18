@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('blog_tags', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('tag_name');
-            $table->bigInteger('tag_slug');
+            $table->string('tag_name')->nullable();
+            $table->string('tag_slug')->nullable();
             $table->timestamps();
         });
 
-       
+        Schema::create('blog_posts_blog_tags', function (Blueprint $table) {
+            $table->bigInteger('blog_post_id');
+            $table->bigInteger('blog_tag_id');
+        });
     }
 
     /**
@@ -27,5 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('blog_tags');
+        Schema::dropIfExists('blog_tags_blog_post');
     }
 };

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\BlogTag;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class BlogTagController extends Controller
 {
@@ -12,7 +14,8 @@ class BlogTagController extends Controller
      */
     public function index()
     {
-        //
+        $allblogtag = BlogTag::orderBy('id', 'asc')->get();
+        return view('backend.pages.blog-tag.index', compact('allblogtag'));
     }
 
     /**
@@ -20,7 +23,7 @@ class BlogTagController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.blog-tag.create');
     }
 
     /**
@@ -28,23 +31,32 @@ class BlogTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate([
+            'tag_name' => 'required|string|unique:blog_tags,tag_name',
+        ]);
+
+        //store data
+        BlogTag::create([
+            'tag_name' => $request->tag_name,
+            'tag_slug' => Str::slug($request->tag_name),
+            'created_at' => now(),
+        ]);
+
+        // notification
+        notyf()->success('Data store success');
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $tag = BlogTag::findOrFail($id);
+        return view('backend.pages.blog-tag.edit', compact('tag'));
     }
 
     /**
@@ -52,7 +64,21 @@ class BlogTagController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate
+        $request->validate([
+            'tag_name' => 'required|string|unique:blog_tags,tag_name,' . $id,
+        ]);
+
+        //store data
+        BlogTag::where('id', $id)->update([
+            'tag_name' => $request->tag_name,
+            'tag_slug' => Str::slug($request->tag_name),
+            'updated_at' => now(),
+        ]);
+
+        // notification
+        notyf()->info('Data update success');
+        return redirect()->route('admin.blog-tag.index');
     }
 
     /**
@@ -60,6 +86,9 @@ class BlogTagController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        BlogTag::findOrFail($id)->delete();
+        // notification
+        notyf()->warning('Data delete success');
+        return back();
     }
 }

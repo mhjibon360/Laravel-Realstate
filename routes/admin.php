@@ -5,7 +5,6 @@ use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\NearbyController;
 use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Backend\BlogTagController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\ChooseusController;
 use App\Http\Controllers\Backend\DownloadController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\Backend\FloorplanController;
 use App\Http\Controllers\Backend\MultiimageController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogTagController;
 use App\Http\Controllers\Backend\PropertytypeController;
 use App\Http\Controllers\Backend\PropertyCategoryController;
 
