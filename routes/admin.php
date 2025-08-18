@@ -104,6 +104,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
 
     // blogpost all routes
+    Route::controller(BlogPostController::class)->group(function () {
+        Route::get('/active/blogpost', 'activeblogpost')->name('active.blogpost');
+        Route::get('/deactive/blogpost', 'deactiveblogpost')->name('deactive.blogpost');
+        Route::get('/change/hot/blogpost/status', 'hotblogpost')->name('hot.blogpost.status');
+        Route::get('/change/featured/blogpost/status', 'featuredblogpost')->name('featured.blogpost.status');
+        Route::get('/change/blogpost/status', 'blogpoststatus')->name('blogpost.status');
+    });
     Route::resource('/blog-post', BlogPostController::class);
 
     // blogcategory all routes

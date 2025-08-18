@@ -217,6 +217,34 @@
                     </ul>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#blogpost" role="button" aria-expanded="false"
+                    aria-controls="blogpost">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Blog Post </span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="blogpost">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.blog-post.create') }}" class="nav-link">
+                                Add Blog Post </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.blog-post.index') }}" class="nav-link">
+                                All Blog Post </a>
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a href="{{ route('admin.active.property') }}" class="nav-link">
+                                Active Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.deactive.property') }}" class="nav-link">
+                                Deactive Poroperty </a>
+                        </li> --}}
+                    </ul>
+                </div>
+            </li>
 
         </ul>
     </div>
