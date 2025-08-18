@@ -35,7 +35,8 @@
                                             <td>{{ $item->title }}</td>
                                             <td>{{ $item->heading }}</td>
                                             <td>{{ $item->icon }}</td>
-                                            <td><a href="{{ $item->link }}" target="_blank" class=" btn btn-info">Link</a></td>
+                                            <td><a href="{{ $item->link }}" target="_blank" class=" btn btn-info">Link</a>
+                                            </td>
                                             <td>{{ $item->created_at->format('Y/M/d') }}</td>
                                             <td>
                                                 <a href="{{ route('admin.platform.edit', $item->id) }}"

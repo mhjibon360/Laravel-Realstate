@@ -189,7 +189,41 @@
                     </ul>
                 </div>
             </li>
-
+            <li class="nav-item nav-category">BLog/News & Article</li>
+            <li class="nav-item">
+                <a href="{{ route('admin.blog-category.index') }}" class="nav-link">
+                    <i class="link-icon" data-feather="message-square"></i>
+                    <span class="link-title">Blog Category</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#property" role="button" aria-expanded="false"
+                    aria-controls="property">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Blog Tags </span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="property">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property.create') }}" class="nav-link">
+                                Add Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.property.index') }}" class="nav-link">
+                                All Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.active.property') }}" class="nav-link">
+                                Active Poroperty </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.deactive.property') }}" class="nav-link">
+                                Deactive Poroperty </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
         </ul>
     </div>
