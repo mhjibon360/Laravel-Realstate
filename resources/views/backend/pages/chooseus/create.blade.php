@@ -1,9 +1,9 @@
 @extends('backend.layouts.backend-master')
-@section('title', 'add new property category')
+@section('title', 'add new choose us')
 @section('content')
     <nav class="page-breadcrumb ">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript::void();">Property-Category</a></li>
+            <li class="breadcrumb-item"><a href="javascript::void();">Choose-us</a></li>
             <li class="breadcrumb-item active" aria-current="page">add</li>
         </ol>
     </nav>
@@ -13,28 +13,38 @@
             <div class="row">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h4 class=" text-capitalize fw-semibold">Add New Property-category</h4>
+                        <h4 class=" text-capitalize fw-semibold">Add Why Choose Us</h4>
                         <hr>
-                        <form action="{{ route('admin.property-category.store') }}" method="post">
+                        <form action="{{ route('admin.us.store') }}" method="post">
                             @csrf
                             @method('POST')
                             <!--from group-->
                             <div class="mb-3">
-                                <label for="category_name" class="form-label text-capitalize">Property Category Name</label>
-                                <input type="text" name="category_name" id="category_name"
-                                    class="form-control {{ $errors->has('category_name') ? 'is-invalid' : '' }}"
-                                    value="{{ old('category_name') }}" />
-                                @error('category_name')
+                                <label for="title" class="form-label text-capitalize">choose us Title</label>
+                                <input type="text" name="title" id="title"
+                                    class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
+                                    value="{{ old('title') }}" />
+                                @error('title')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                             <!--from group-->
                             <div class="mb-3">
-                                <label for="category_icon" class="form-label text-capitalize">Icon(only class)</label>
-                                <input type="text" name="category_icon" id="category_icon"
-                                    class="form-control {{ $errors->has('category_icon') ? 'is-invalid' : '' }}"
-                                    value="{{ old('category_icon') }}" />
-                                @error('category_icon')
+                                <label for="details" class="form-label text-capitalize">choose us details</label>
+                                <input type="text" name="details" id="details"
+                                    class="form-control {{ $errors->has('details') ? 'is-invalid' : '' }}"
+                                    value="{{ old('details') }}" />
+                                @error('details')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <!--from group-->
+                            <div class="mb-3">
+                                <label for="icon" class="form-label text-capitalize">Icon(only class)</label>
+                                <input type="text" name="icon" id="icon"
+                                    class="form-control {{ $errors->has('icon') ? 'is-invalid' : '' }}"
+                                    value="{{ old('icon') }}" />
+                                @error('icon')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>

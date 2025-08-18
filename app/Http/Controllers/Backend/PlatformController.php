@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Platform;
 use Illuminate\Http\Request;
 
 class PlatformController extends Controller
@@ -12,7 +13,8 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        //
+        $allplatform = Platform::orderBy('id', 'asc')->get();
+        return view('backend.pages.platform.index', compact('allplatform'));
     }
 
     /**
@@ -20,7 +22,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.pages.platform.create');
     }
 
     /**
@@ -28,23 +30,37 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        $request->validate([
+            'icon' => 'required',
+            'title' => 'required',
+            'heading' => 'required',
+            'link' => 'required',
+        ]);
+
+        //store data
+        Platform::create([
+            'icon' => $request->icon,
+            'title' => $request->title,
+            'heading' => $request->heading,
+            'link' => $request->link,
+            'created_at' => now(),
+        ]);
+
+        // notification
+        notyf()->success('Data store success');
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $choose = Platform::findOrFail($id);
+        return view('backend.pages.platform.edit', compact('choose'));
     }
 
     /**
@@ -52,7 +68,24 @@ class PlatformController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // validate
+        $request->validate([
+            'icon' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+        ]);
+
+        //store data
+        Platform::where('id', $id)->update([
+            'icon' => $request->icon,
+            'title' => $request->title,
+            'details' => $request->details,
+            'updated_at' => now(),
+        ]);
+
+        // notification
+        notyf()->info('Data update success');
+        return redirect()->route('admin.us.index');
     }
 
     /**
@@ -60,6 +93,9 @@ class PlatformController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Platform::findOrFail($id)->delete();
+        // notification
+        notyf()->warning('Data delete success');
+        return back();
     }
 }

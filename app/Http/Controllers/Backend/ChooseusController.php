@@ -14,8 +14,8 @@ class ChooseusController extends Controller
      */
     public function index()
     {
-        $allpchooseus = ChooseUs::orderBy('id', 'asc')->get();
-        return view('backend.pages.chooseus.index', compact('allpchooseus'));
+        $allchooseus = ChooseUs::orderBy('id', 'asc')->get();
+        return view('backend.pages.chooseus.index', compact('allchooseus'));
     }
 
     /**

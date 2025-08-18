@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('icon');
             $table->string('title');
             $table->string('heading');
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }

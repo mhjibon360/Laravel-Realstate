@@ -22,6 +22,7 @@ class BannerController extends Controller
      */
     public function updatebanner(Request $request)
     {
+        
 
         $banner = Banner::findOrFail($request->id);
 

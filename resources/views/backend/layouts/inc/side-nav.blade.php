@@ -71,11 +71,32 @@
             </li>
 
             <li class="nav-item">
-                <a href="pages/apps/calendar.html" class="nav-link">
-                    <i class="link-icon" data-feather="calendar"></i>
-                    <span class="link-title">Calendar</span>
+                <a href="{{ route('admin.manage.download') }}" class="nav-link">
+                    <i class="link-icon" data-feather="message-square"></i>
+                    <span class="link-title">Manage Download</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#platform" role="button" aria-expanded="false"
+                    aria-controls="platform">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title"> Download Platform</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="platform">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.platform.create') }}" class="nav-link">Add Download Platform</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.platform.index') }}" class="nav-link">All Download Platform</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+
             <li class="nav-item nav-category">property</li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#propertycategory" role="button"

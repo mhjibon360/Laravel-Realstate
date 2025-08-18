@@ -1,9 +1,9 @@
 @extends('backend.layouts.backend-master')
-@section('title', 'all choose us')
+@section('title', 'all download platform')
 @section('content')
     <nav class="page-breadcrumb ">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javascript::void();">Choose-us</a></li>
+            <li class="breadcrumb-item"><a href="javascript::void();">Download-platform</a></li>
             <li class="breadcrumb-item active" aria-current="page">list</li>
         </ol>
     </nav>
@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h5 class="card-title text-capitalize ">List of choose us</h5>
+                        <h5 class="card-title text-capitalize ">List of Download platform</h5>
                         <hr>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table">
@@ -21,25 +21,27 @@
                                     <tr>
                                         <th>Si</th>
                                         <th>Title</th>
-                                        <th>Details</th>
+                                        <th>Platform Name</th>
                                         <th>Icon</th>
+                                        <th>Link</th>
                                         <th>Date</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($allchooseus as $item)
+                                    @foreach ($allplatform as $item)
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>{{ $item->title }}</td>
-                                            <td>{{ $item->title }}</td>
+                                            <td>{{ $item->heading }}</td>
                                             <td>{{ $item->icon }}</td>
+                                            <td><a href="{{ $item->link }}" target="_blank" class=" btn btn-info">Link</a></td>
                                             <td>{{ $item->created_at->format('Y/M/d') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.us.edit', $item->id) }}"
+                                                <a href="{{ route('admin.platform.edit', $item->id) }}"
                                                     class="btn btn-inverse-warning mb-1 mb-md-0">Edit</a>
-                                                <form action="{{ route('admin.us.destroy', $item->id) }}" method="post"
-                                                    style="display: inline-block;">
+                                                <form action="{{ route('admin.platform.destroy', $item->id) }}"
+                                                    method="post" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button" id="delete_btn"
