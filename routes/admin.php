@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\BannerController;
@@ -58,7 +59,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     });
 
 
-
     // why choose us item all routes
     Route::resource('/choose/us', ChooseusController::class);
 
@@ -70,7 +70,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         Route::get('/testimonial/status', 'testimonialstatus')->name('testimonial.status');
     });
     Route::resource('/testimonial', TestimonialController::class);
-
 
 
     // property category all routes
@@ -118,4 +117,22 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     // blogtag all routes
     Route::resource('/blog-tag', BlogTagController::class);
+
+    // manage all account
+    Route::controller(AccountController::class)->group(function () {
+        Route::get('/all/agent/account/list', 'allagentaccount')->name('all.agent.account');
+        Route::get('/edit/agent/account/{id}', 'editagentaccount')->name('edit.agent.account');
+        Route::put('/update/agent/account/{id}', 'updateagentaccount')->name('update.agent.account');
+        Route::delete('/delete/agent/account/{id}', 'deleteagentaccount')->name('delete.agent.account');
+        Route::post('/agent/account/status', 'statusagentaccount')->name('status.agent.account');
+
+        Route::get('/all/customer/account/list', 'allcustomeraccount')->name('all.customer.account');
+        Route::get('/edit/customer/account/{id}', 'editcustomeraccount')->name('edit.customer.account');
+        Route::put('/update/customer/account/{id}', 'updatecustomeraccount')->name('update.customer.account');
+        Route::delete('/delete/customer/account/{id}', 'deletecustomeraccount')->name('delete.customer.account');
+        Route::post('/customer/account/status', 'statuscustomeraccount')->name('status.customer.account');
+
+        Route::get('/add/account', 'addaccount')->name('add.account');
+        Route::post('/store/account', 'storeaccount')->name('store.account');
+    });
 });

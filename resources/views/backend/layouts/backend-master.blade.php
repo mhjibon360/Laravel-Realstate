@@ -9,7 +9,7 @@
     <meta name="author" content="NobleUI">
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title') | admin panel</title>
 
     <!-- Fonts -->
@@ -124,7 +124,13 @@
     <script src="{{ asset('backend') }}/assets/js/tinymce.js"></script>
     <script src="{{ asset('backend') }}/assets/js/dropify.js"></script>
 
-
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
     @stack('admin_script')
 

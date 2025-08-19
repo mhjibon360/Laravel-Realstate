@@ -234,18 +234,28 @@
                             <a href="{{ route('admin.blog-post.index') }}" class="nav-link">
                                 All Blog Post </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('admin.active.property') }}" class="nav-link">
-                                Active Poroperty </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.deactive.property') }}" class="nav-link">
-                                Deactive Poroperty </a>
-                        </li> --}}
                     </ul>
                 </div>
             </li>
-
+            <li class="nav-item nav-category">Admin/Agent/Customer </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#account" role="button" aria-expanded="false"
+                    aria-controls="account">
+                    <i class="link-icon" data-feather="mail"></i>
+                    <span class="link-title">Manage Accounts</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="account">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.all.agent.account') }}" class="nav-link"> Agent List </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.all.customer.account') }}" class="nav-link"> Customer List </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>

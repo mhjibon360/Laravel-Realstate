@@ -19,6 +19,13 @@ class BackendController extends Controller
     }
 
     /**
+     * add agent account
+     */
+    public function addagentaccount(){
+        return view();
+    }
+
+    /**
      * edit profile
      */
     public function editprofile()

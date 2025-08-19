@@ -7,8 +7,8 @@ use App\Http\Controllers\Frontend\UserConroller;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Frontend\FrontendController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('/', 'index')->name('home.index');
 });
 
 // Route::get('/dashboard', function () {
