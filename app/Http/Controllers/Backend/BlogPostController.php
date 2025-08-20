@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\BlogTag;
 use App\Models\BlogPost;
+use Illuminate\Support\Str;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -75,6 +76,7 @@ class BlogPostController extends Controller
             'user_id' => Auth::id(),
             'category_id' => $request->category_id,
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
             'thumbnail' => $thumurl,
             'details' => $request->details,
             'status' => $request->status ? $request->status : '1',
@@ -142,6 +144,7 @@ class BlogPostController extends Controller
             'user_id' => Auth::id(),
             'category_id' => $request->category_id,
             'title' => $request->title,
+            'slug' => Str::slug($request->title),
             'thumbnail' => isset($thumurl) ? $thumurl : $blog->thumbnail,
             'details' => $request->details,
             'status' => $request->status ? $request->status : '1',

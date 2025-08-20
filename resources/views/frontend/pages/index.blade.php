@@ -60,5 +60,4 @@
     @include('frontend.layouts.partials.home.download')
     <!-- download-section end -->
 
-
 @endsection

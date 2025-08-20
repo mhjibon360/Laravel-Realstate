@@ -28,7 +28,7 @@ class PropertyController extends Controller
      */
     public function activeproperty()
     {
-        $allproperty = Property::where('status',1)->latest()->get();
+        $allproperty = Property::where('status', 1)->latest()->get();
         return view('backend.pages.property.active-property', compact('allproperty'));
     }
     /**
@@ -36,7 +36,7 @@ class PropertyController extends Controller
      */
     public function deactiveproperty()
     {
-        $allproperty = Property::where('status',0)->get();
+        $allproperty = Property::where('status', 0)->get();
         return view('backend.pages.property.deactive-property', compact('allproperty'));
     }
 
@@ -191,7 +191,6 @@ class PropertyController extends Controller
     public function update(Request $request, string $id)
     {
 
-
         $property = Property::findOrFail($id);
 
         // validate data
@@ -229,9 +228,9 @@ class PropertyController extends Controller
         //upload static graph image
         if ($request->hasFile('page_statistics_image')) {
             $page_statistics_image = $request->file('page_statistics_image');
-            $namepage_statistics_image = hexdec(uniqid()) . '.' . $page_statistics_image->getClientOriginalExtension();
-            $staticurl = "upload/property/static/" . $namepage_statistics_image;
-            $page_statistics_image->move(public_path("upload/property/static/"), $namepage_statistics_image);
+            $staticname = hexdec(uniqid()) . '.' . $page_statistics_image->getClientOriginalExtension();
+            $staticurl = "upload/property/static/" . $staticname;
+            $page_statistics_image->move(public_path("upload/property/static/"), $staticname);
             //unlink
             if (file_exists($property->page_statistics_image)) {
                 @unlink($property->page_statistics_image);

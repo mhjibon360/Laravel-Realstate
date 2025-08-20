@@ -16,7 +16,7 @@
                          </figure>
                          <div class="lower-content">
                              <div class="inner">
-                                 <h4><a href="agents-details.html">{{ $agent->name }}</a></h4>
+                                 <h4><a href="{{ route('agent.details', ['id' => $agent->id, 'username' => $agent->username]) }}">{{ $agent->name }}</a></h4>
                                  <span class="designation">{{ $agent->profession }}</span>
                                  <ul class="social-links clearfix">
                                      <li><a href="{{ $agent->facebook }}"><i class="fab fa-facebook-f"></i></a></li>

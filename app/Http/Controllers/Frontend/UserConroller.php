@@ -12,6 +12,6 @@ class UserConroller extends Controller
      */
     public function index()
     {
-        return ('user dashboard');
+        return view('frontend.pages.dashboard.index');
     }
 }

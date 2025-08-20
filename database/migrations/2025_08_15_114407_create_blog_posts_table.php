@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('category_id');
             $table->bigInteger('tag_id');
             $table->mediumText('title');
+            $table->mediumText('slug')->nullable();
             $table->string('thumbnail');
             $table->longText('details');
             $table->bigInteger('status');

@@ -82,10 +82,17 @@
     <script src="{{ asset('frontend') }}/assets/js/jquery.nice-select.min.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/jQuery.style.switcher.min.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/jquery-ui.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/jquery.paroller.min.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/product-filter.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/nav-tool.js"></script>
-
+    <!-- map script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-CE0deH3Jhj6GN4YvdCFZS7DpbXexzGU"></script>
+    <script src="{{ asset('frontend') }}/assets/js/gmaps.js"></script>
+    <script src="{{ asset('frontend') }}/assets/js/map-helper.js"></script>
     <!-- main-js -->
     <script src="{{ asset('frontend') }}/assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+    @stack('frontend_script')
 
 </body><!-- End of .page_wrapper -->
 
