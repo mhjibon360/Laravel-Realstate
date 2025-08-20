@@ -34,7 +34,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(UserConroller::class)->group(function () {
         Route::get('/dashboard', 'index')->name('dashboard');
-        Route::get('/edit/profile', 'edit')->name('edit.profile');
-        Route::put('/update/profile', 'update')->name('update.profile');
+        Route::get('/edit/profile', 'editprofile')->name('edit.profile');
+        Route::put('/update/profile', 'updateprofile')->name('update.profile');
+
+        Route::get('/change/password', 'changepassword')->name('change.password');
+        Route::put('/update/password', 'updatepassword')->name('update.password');
     });
 });
