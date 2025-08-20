@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Frontend\UserConroller;
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Frontend\WishlitController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -46,3 +47,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::resource('/wishlist',WishlitController::class);
+Route::resource('/compare',CompareController::class);

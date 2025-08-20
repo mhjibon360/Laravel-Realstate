@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Compare;
+use Illuminate\Support\Facades\Auth;
 
 class CompareController extends Controller
 {
@@ -28,7 +30,20 @@ class CompareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Auth::check()) {
+            $exists = Compare::where('user_id', Auth::id())->where('property_id', $request->id)->first();
+            if ($exists) {
+                return response()->json(['error' => 'This property alreay in your compare list']);
+            } else {
+                Compare::create([
+                    'user_id' => Auth::id(),
+                    'property_id' => $request->id,
+                ]);
+                return response()->json(['success' => 'Property added on compare list']);
+            }
+        } else {
+            return response()->json(['error' => 'please login to compare property']);
+        }
     }
 
     /**

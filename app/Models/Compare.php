@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Compare extends Model
 {
-    //
+    protected $guarded = ['id'];
 }

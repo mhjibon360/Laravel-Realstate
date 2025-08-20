@@ -111,10 +111,51 @@
 
     <!-- all ajax script-->
     <script>
+        // add to wishlist
         function addToWishlist(id) {
             $.ajax({
                 type: "POST",
                 url: route('wishlist.store'),
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    // sweetalert
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        // iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 2500,
+                        timerProgressBar: true,
+                    });
+                    if (response.success) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.success,
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: response.error,
+                        })
+                    }
+                    // sweetalert  end
+
+                }
+            });
+        }
+
+
+        // add to compare
+        function addTocompare(id) {
+            $.ajax({
+                type: "POST",
+                url: route('compare.store'),
                 data: {
                     id: id
                 },
