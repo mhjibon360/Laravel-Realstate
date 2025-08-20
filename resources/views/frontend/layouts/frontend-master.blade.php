@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
     <title>Realshed - @yield('title')</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fav Icon -->
     <link rel="icon" href="{{ asset('frontend') }}/assets/images/favicon.ico" type="image/x-icon">
 
@@ -31,7 +31,7 @@
     <link href="{{ asset('frontend') }}/assets/css/switcher-style.css" rel="stylesheet">
     <link href="{{ asset('frontend') }}/assets/css/style.css" rel="stylesheet">
     <link href="{{ asset('frontend') }}/assets/css/responsive.css" rel="stylesheet">
-
+    @routes()
 </head>
 
 
@@ -97,7 +97,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
         integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @stack('frontend_script')
+
+
+    <!-- all ajax script-->
+    <script>
+        function addToWishlist(id) {
+            $.ajax({
+                type: "POST",
+                url: route('wishlist.store'),
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    // sweetalert
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        // iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 2500,
+                        timerProgressBar: true,
+                    });
+                    if (response.success) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.success,
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: response.error,
+                        })
+                    }
+                    // sweetalert  end
+
+                }
+            });
+        }
+    </script>
+    <!-- all ajax script end-->
 
 </body><!-- End of .page_wrapper -->
 

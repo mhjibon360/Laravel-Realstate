@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Frontend\UserConroller;
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Frontend\WishlitController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 Route::controller(FrontendController::class)->group(function () {
@@ -40,4 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/change/password', 'changepassword')->name('change.password');
         Route::put('/update/password', 'updatepassword')->name('update.password');
     });
+
+
 });
+
+Route::resource('/wishlist',WishlitController::class);
