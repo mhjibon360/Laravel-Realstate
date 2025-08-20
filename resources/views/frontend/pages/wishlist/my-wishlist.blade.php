@@ -25,17 +25,18 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
-                  @include('frontend.layouts.includes.user-leftmenu')
+                    @include('frontend.layouts.includes.user-leftmenu')
                 </div>
                 <div class="col-lg-8 col-md-12 col-sm-12 content-side">
                     <div class="property-content-side">
 
-                        <div class="wrapper list">
-                            <div class="deals-list-content list-item">
+                        <div class="wrapper list" id="wishlist_holder">
+                            {{-- <div class="deals-list-content list-item">
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img src="{{ asset('frontend') }}/assets/images/resource/deals-3.jpg"
+                                            <figure class="image"><img
+                                                    src="{{ asset('frontend') }}/assets/images/resource/deals-3.jpg"
                                                     alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
                                             <span class="category">Featured</span>
@@ -77,7 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 

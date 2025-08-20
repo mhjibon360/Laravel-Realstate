@@ -20,6 +20,106 @@
         </div>
     </section>
     <!--End Page Title-->
+
+
+    <!-- property-page-section -->
+    <section class="property-page-section property-list">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                    @include('frontend.layouts.includes.user-leftmenu')
+                </div>
+                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                    <div class="property-content-side">
+
+                        <div class="wrapper list">
+                            <div class="deals-list-content list-item">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <nav class="breadcrumb" style="background: #ecf8f1;">
+                                            <a class="breadcrumb-item text-success" href="javascript::void();">Main</a>
+                                            <span class="breadcrumb-item active" aria-current="page">profile</span>
+                                        </nav>
+                                        <hr>
+                                        <h5 class="mb-2 font-weight-bold">Change Password</h5>
+                                        <form action="{{ route('update.password') }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" value="{{ Auth::user()->id }}" name="id">
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label for="password" class="form-label">Current Password</label>
+                                                        <input type="password" name="password" id="password"
+                                                            class="form-control" value="" />
+                                                        @error('password')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="new_password" class="form-label">New Password</label>
+                                                        <input type="password" name="new_password" id="new_password"
+                                                            class="form-control" value="" />
+                                                        @error('new_password')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="confirm_password" class="form-label">Confirm
+                                                            Password</label>
+                                                        <input type="password" name="confirm_password" id="confirm_password"
+                                                            class="form-control" value="" />
+                                                        @error('confirm_password')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <button class=" btn btn-success">Save Profile</button>
+                                                <a href="{{ route('dashboard') }}" class="ml-2 btn btn-danger">Cancel</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- property-page-section end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <section class=" my-4">
         <div class="container">
             <div class="row">

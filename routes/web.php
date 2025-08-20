@@ -42,9 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/change/password', 'changepassword')->name('change.password');
         Route::put('/update/password', 'updatepassword')->name('update.password');
     });
-
-
 });
 
-Route::resource('/wishlist',WishlitController::class);
-Route::resource('/compare',CompareController::class);
+Route::controller(WishlitController::class)->group(function () {
+    Route::get('/wishlist/data', 'wishlistdata')->name('wishlist.data');
+});
+Route::resource('/wishlist', WishlitController::class);
+Route::resource('/compare', CompareController::class);

@@ -19,8 +19,119 @@
             </div>
         </div>
     </section>
+
+
+
+
+    <!-- property-page-section -->
+    <section class="property-page-section property-list">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                    @include('frontend.layouts.includes.user-leftmenu')
+                </div>
+                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <nav class="breadcrumb" style="background: #ecf8f1;">
+                                <a class="breadcrumb-item text-success" href="javascript::void();">Main</a>
+                                <span class="breadcrumb-item active" aria-current="page">profile</span>
+                            </nav>
+                            <hr>
+                            <h5 class="mb-2 font-weight-bold">Edit Your Profile</h5>
+                            <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" value="{{ Auth::user()->id }}" name="id">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Full Name</label>
+                                            <input type="text" name="name" id="name" class="form-control"
+                                                value="{{ Auth::user()->name }}" />
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">E-mail</label>
+                                            <input type="email" name="email" id="email" class="form-control"
+                                                value="{{ Auth::user()->email }}" />
+                                            @error('email')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="username" class="form-label">Username</label>
+                                            <input type="text" name="username" id="username" class="form-control"
+                                                value="{{ Auth::user()->username }}" />
+                                            @error('username')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="phone" class="form-label">Mobile/Phone</label>
+                                            <input type="text" name="phone" id="phone" class="form-control"
+                                                value="{{ Auth::user()->phone }}" />
+                                            @error('phone')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="address" class="form-label">Adddress</label>
+                                            <input type="text" name="address" id="address" class="form-control"
+                                                value="{{ Auth::user()->address }}" />
+                                            @error('address')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label for="photo" class="form-label">Profile Photo</label>
+                                            <input type="file" name="photo" id="photo" class="form-control dropify"
+                                                data-default-file="{{ isset(Auth::user()->photo) ? asset(Auth::user()->photo) : Avatar::create(Auth::user()->name)->toBase64() }}" />
+                                            @error('photo')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <button class=" btn btn-success">Save Profile</button>
+                                    <a href="{{ route('dashboard') }}" class="ml-2 btn btn-danger">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- property-page-section end -->
+
+
+
+
+
+
+
+
+
+
+
+
     <!--End Page Title-->
-    <section class=" my-4">
+    {{-- <section class=" my-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -113,7 +224,7 @@
             </div>
         </div>
 
-    </section>
+    </section> --}}
 @endsection
 @push('frontend_script')
     <script>

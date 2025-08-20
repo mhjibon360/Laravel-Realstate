@@ -1,43 +1,74 @@
 @php
     $userroutes = Route::currentRouteName();
 @endphp
-<div class="card">
-    <div class="card-body">
-        <div class=" text-center">
-            <img src="{{ isset(Auth::user()->photo) ? asset(Auth::user()->photo) : Avatar::create(Auth::user()->name)->toBase64() }}"
-                style="height: 100px;width:100px;object-fit:cover; margin:0 auto;"
-                class=" img-fluid img-thumbnail text-center mx-auto" alt="">
-            <hr class=" my-1">
-            <h4 class=" font-weight-bold ">{{ Auth::user()->name }}</h4>
-            <h6 class=" font-weight-normal ">{{ Auth::user()->email }}</h6>
-            <span class=" font-weight-light font-italic ">{{ Auth::user()->address }}</span>
+<div class="blog-sidebar">
+    <div class="sidebar-widget post-widget">
+        <div class="widget-title">
+            <h4>Your Profile </h4>
+        </div>
+        <div class="post-inner">
+            <div class="post">
+                <figure class="post-thumb">
+                    <a href="javascript::void();">
+                        <img src="{{ isset(Auth::user()->photo) ? asset(Auth::user()->photo) : Avatar::create(Auth::user()->name)->toBase64() }}"
+                            alt="">
+                    </a>
+                </figure>
+                <h5><a href="javascript::void();">{{ Auth::user()->name }}</a>
+                </h5>
+                <p>{{ Auth::user()->email }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="sidebar-widget category-widget">
+        <div class="widget-title">
+            <h4>Menu</h4>
+        </div>
+        <div class="widget-content">
+            <ul class="category-list ">
+
+                <li>
+                    <a href="{{ route('dashboard') }}" class="{{ $userroutes == 'dashboard' ? 'text-success' : '' }}">
+                        <i class="fas fa-chart-line"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('edit.profile') }}"
+                        class="{{ $userroutes == 'edit.profile' ? 'text-success' : '' }}">
+                        <i class="fal fa-user"></i>
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('change.password') }}"
+                        class="{{ $userroutes == 'change.password' ? 'text-success' : '' }}">
+                        <i class="far fa-key-skeleton"></i>
+                        Change Password
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('wishlist.index') }}"
+                        class="{{ $userroutes == 'wishlist.index' ? 'text-success' : '' }}">
+                        <i class="fal fa-heart"></i>
+                        My Wishlist
+                    </a>
+                </li>
+                <li>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        @method('post')
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                            <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+                            Logout
+                        </a>
+                    </form>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
-<!-- user dashboard menu-->
-<div class="card mt-3">
-    <div class="card-body">
-        <div class=" text-center">
-            <a href="{{ route('dashboard') }}"
-                class="my-3 btn w-full d-block {{ $userroutes == 'dashboard' ? 'btn-success' : 'btn-outline-success ' }}">Dashboard</a>
-
-            <a href="{{ route('edit.profile') }}"
-                class="my-3 btn w-full d-block {{ $userroutes == 'edit.profile' ? 'btn-success' : 'btn-outline-success ' }}">Profile</a>
-
-            <a href="{{ route('change.password') }}"
-                class="my-3 btn w-full d-block {{ $userroutes == 'change.password' ? 'btn-success' : 'btn-outline-success ' }}">Change
-                Password</a>
-
-            <form action="{{ route('logout') }}" method="post">
-                @csrf
-                @method('POST')
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                        this.closest('form').submit();"
-                    class="my-3 btn w-full d-block {{ $userroutes == 'change.password' ? 'btn-danger' : 'btn-outline-danger ' }}">
-                    Logout</a>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- user dashboard menu end-->

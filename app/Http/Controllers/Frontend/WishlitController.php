@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Property;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,15 +15,18 @@ class WishlitController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.pages.wishlist.my-wishlist');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the wishlist data
      */
-    public function create()
+    public function wishlistdata()
     {
-        //
+        $wishlistproperty = Wishlist::with(['property','users'])->where('user_id', Auth::id())->get();
+        return response()->json([
+            'wishlistproperty' => $wishlistproperty,
+        ]);
     }
 
     /**
