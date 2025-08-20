@@ -23,7 +23,7 @@ class WishlitController extends Controller
      */
     public function wishlistdata()
     {
-        $wishlistproperty = Wishlist::with(['property','users'])->where('user_id', Auth::id())->get();
+        $wishlistproperty = Wishlist::with(['property.propertycategory','property.users', 'users'])->where('user_id', Auth::id())->get();
         return response()->json([
             'wishlistproperty' => $wishlistproperty,
         ]);
@@ -77,8 +77,9 @@ class WishlitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function wishlistremove(Request $request)
     {
-        //
+        Wishlist::where('id', $request->id)->delete();
+        return response()->json(['success' => 'Wishlist removew success']);
     }
 }

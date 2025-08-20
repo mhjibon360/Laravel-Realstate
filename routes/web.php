@@ -46,6 +46,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::controller(WishlitController::class)->group(function () {
     Route::get('/wishlist/data', 'wishlistdata')->name('wishlist.data');
+    Route::post('/wishlist/remove', 'wishlistremove')->name('wishlist.remove');
 });
 Route::resource('/wishlist', WishlitController::class);
+
+Route::controller(CompareController::class)->group(function () {
+    Route::get('/compare/data', 'comparedata')->name('compare.data');
+    Route::post('/compare/remove', 'compareremove')->name('compare.remove');
+});
 Route::resource('/compare', CompareController::class);

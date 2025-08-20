@@ -57,6 +57,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('compare.index') }}"
+                        class="{{ $userroutes == 'compare.index' ? 'text-success' : '' }}">
+                        <i class="fal fa-compress-arrows-alt"></i>
+                        Compare
+                    </a>
+                </li>
+                <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         @method('post')

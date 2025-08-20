@@ -33,15 +33,10 @@
     <link href="{{ asset('frontend') }}/assets/css/responsive.css" rel="stylesheet">
     @routes()
 </head>
-
-
 <!-- page wrapper -->
 
 <body>
-
     <div class="boxed_wrapper">
-
-
         <!-- preloader -->
         {{-- @include('frontend.layouts.includes.loader') --}}
         <!-- preloader end -->
@@ -53,15 +48,11 @@
 
         @include('frontend.layouts.includes.header')
 
-
-
         @yield('main')
 
         <!-- main-footer -->
         @include('frontend.layouts.includes.footer')
         <!-- main-footer end -->
-
-
 
         <!--Scroll to top-->
         <button class="scroll-top scroll-to-target" data-target="html">
@@ -111,6 +102,14 @@
 
     <!-- all ajax script-->
     <script>
+
+        // limit functin
+        function strLimit(text, limit = 100, end = "...") {
+            return text.length > limit ? text.substring(0, limit) + end : text;
+        }
+
+
+
         // add to wishlist
         function addToWishlist(id) {
             $.ajax({
@@ -121,6 +120,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
+                    allWishlist(); //calling wishlist
                     // sweetalert
                     const Toast = Swal.mixin({
                         toast: true,
@@ -168,42 +168,50 @@
                                     <div class="inner-box">
                                         <div class="image-box">
                                             <figure class="image"><img
-                                                    src="{{ asset('frontend') }}/assets/images/resource/deals-3.jpg"
+                                                    src="${value.property.thumbnail}"
+                                                    style="height:370px;object-fit:cover;"
                                                     alt=""></figure>
                                             <div class="batch"><i class="icon-11"></i></div>
-                                            <span class="category">Featured</span>
-                                            <div class="buy-btn"><a href="property-details.html">For Buy</a></div>
+                                            <span class="category">${value.property.propertycategory.category_name}</span>
+                                            <div class="buy-btn"><a href="property-details.html">For ${value.property.buy_rent_type}</a></div>
                                         </div>
                                         <div class="lower-content">
                                             <div class="title-text">
-                                                <h4><a href="property-details.html">Villa on Grand Avenue</a></h4>
+                                                <h4><a href="/property/details/${value.property.property_slug}">${value.property.property_name}</a></h4>
                                             </div>
                                             <div class="price-box clearfix">
                                                 <div class="price-info pull-left">
                                                     <h6>Start From</h6>
-                                                    <h4>$30,000.00</h4>
+                                                    ${value.property.discount_price
+                                                    ? ` <h4>$${value.property.discount_price}</h4>
+                                                                                    <h4 class="text-secondary"><del>$${value.property.price}</del></h4>`
+                                                    :`
+                                                                                     <h4>$${value.property.price}</h4>
+
+                                                                                    `
+                                                    }
+
                                                 </div>
                                                 <div class="author-box pull-right">
                                                     <figure class="author-thumb">
-                                                        <img src="assets/images/feature/author-1.jpg" alt="">
-                                                        <span>Michael Bean</span>
+                                                        <img src="${value.property.users.photo}" alt="">
+                                                        <span>${value.property.users.name}</span>
                                                     </figure>
                                                 </div>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing sed eiusm do
-                                                tempor incididunt labore.</p>
+                                            <p> ${strLimit(value.property.property_descriptions, 100)}</p>
                                             <ul class="more-details clearfix">
-                                                <li><i class="icon-14"></i>3 Beds</li>
-                                                <li><i class="icon-15"></i>2 Baths</li>
-                                                <li><i class="icon-16"></i>600 Sq Ft</li>
+                                                <li><i class="icon-14"></i>${value.property.bedroom} Beds</li>
+                                                <li><i class="icon-15"></i>${value.property.bath_rooms} Baths</li>
+                                                <li><i class="icon-16"></i>${value.property.property_size}</li>
                                             </ul>
                                             <div class="other-info-box clearfix">
-                                                <div class="btn-box pull-left"><a href="property-details.html"
+                                                <div class="btn-box pull-left">
+                                                    <a href="/property/details/${value.property.property_slug}"
                                                         class="theme-btn btn-two">See Details</a></div>
                                                 <ul class="other-option pull-right clearfix">
-                                                    <li><a href="property-details.html"><i class="icon-12"></i></a>
-                                                    </li>
-                                                    <li><a href="property-details.html"><i class="icon-13"></i></a>
+
+                                                    <li><a type="button" id="${value.id}" onclick="removeWishlist(this.id)"><i class="far fa-trash"></i></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -213,12 +221,55 @@
                             </div>
 
                     `;
-                        $('#wishlist_holder').html(wishlist);
-                    });
+                });
+                $('#wishlist_holder').html(wishlist);
                 }
             });
         }
         allWishlist(); //calling wishlist
+
+        // remove to wishlis
+        function removeWishlist(id) {
+           $.ajax({
+                type: "POST",
+                url: route('wishlist.remove'),
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    allWishlist(); //calling wishlist
+                    // sweetalert
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        // iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 2500,
+                        timerProgressBar: true,
+                    });
+                    if (response.success) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.success,
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: response.error,
+                        })
+                    }
+                    // sweetalert  end
+                }
+            });
+        }
+
+
+
+
 
 
         // add to compare
@@ -231,6 +282,7 @@
                 },
                 dataType: "json",
                 success: function(response) {
+                    allcomparest(); //calling compare list
                     // sweetalert
                     const Toast = Swal.mixin({
                         toast: true,
@@ -259,6 +311,125 @@
                 }
             });
         }
+
+        // wishlist product show
+        function allcomparest() {
+            $.ajax({
+                type: "GET",
+                url: route('compare.data'),
+                // data: "data",
+                dataType: "json",
+                success: function(response) {
+                    var compare = '';
+
+                    $.each(response.compareproperty, function(key, value) {
+                        compare += `
+
+                             <div class="deals-list-content list-item">
+                                <div class="deals-block-one">
+                                    <div class="inner-box">
+                                        <div class="image-box">
+                                            <figure class="image"><img
+                                                    src="${value.property.thumbnail}"
+                                                    style="height:370px;object-fit:cover;"
+                                                    alt=""></figure>
+                                            <div class="batch"><i class="icon-11"></i></div>
+                                            <span class="category">${value.property.propertycategory.category_name}</span>
+                                            <div class="buy-btn"><a href="property-details.html">For ${value.property.buy_rent_type}</a></div>
+                                        </div>
+                                        <div class="lower-content">
+                                            <div class="title-text">
+                                                <h4><a href="/property/details/${value.property.property_slug}">${value.property.property_name}</a></h4>
+                                            </div>
+                                            <div class="price-box clearfix">
+                                                <div class="price-info pull-left">
+                                                    <h6>Start From</h6>
+                                                    ${value.property.discount_price
+                                                    ? ` <h4>$${value.property.discount_price}</h4>
+                                                                                    <h4 class="text-secondary"><del>$${value.property.price}</del></h4>`
+                                                    :`
+                                                                                     <h4>$${value.property.price}</h4>
+
+                                                                                    `
+                                                    }
+
+                                                </div>
+                                                <div class="author-box pull-right">
+                                                    <figure class="author-thumb">
+                                                        <img src="${value.property.users.photo}" alt="">
+                                                        <span>${value.property.users.name}</span>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            <p> ${strLimit(value.property.property_descriptions, 100)}</p>
+                                            <ul class="more-details clearfix">
+                                                <li><i class="icon-14"></i>${value.property.bedroom} Beds</li>
+                                                <li><i class="icon-15"></i>${value.property.bath_rooms} Baths</li>
+                                                <li><i class="icon-16"></i>${value.property.property_size}</li>
+                                            </ul>
+                                            <div class="other-info-box clearfix">
+                                                <div class="btn-box pull-left">
+                                                    <a href="/property/details/${value.property.property_slug}"
+                                                        class="theme-btn btn-two">See Details</a></div>
+                                                <ul class="other-option pull-right clearfix">
+
+                                                    <li><a type="button" id="${value.id}" onclick="removeCompare(this.id)"><i class="far fa-trash"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    `;
+                });
+                $('#compare_holder').html(compare);
+                }
+            });
+        }
+        allcomparest(); //calling compare
+
+        // remove to compare
+        function removeCompare(id) {
+           $.ajax({
+                type: "POST",
+                url: route('compare.remove'),
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    allcomparest(); //calling wishlist
+                    // sweetalert
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        // iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 2500,
+                        timerProgressBar: true,
+                    });
+                    if (response.success) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: response.success,
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: response.error,
+                        })
+                    }
+                    // sweetalert  end
+                }
+            });
+        }
+
+
     </script>
     <!-- all ajax script end-->
 

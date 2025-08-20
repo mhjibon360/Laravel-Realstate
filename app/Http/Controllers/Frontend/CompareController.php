@@ -14,7 +14,18 @@ class CompareController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.pages.compare.my-compare');
+    }
+
+    /**
+     * Show the compare data
+     */
+    public function comparedata()
+    {
+        $compareproperty = Compare::with(['property.propertycategory', 'property.users', 'users'])->where('user_id', Auth::id())->get();
+        return response()->json([
+            'compareproperty' => $compareproperty,
+        ]);
     }
 
     /**
@@ -73,8 +84,9 @@ class CompareController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function compareremove(Request $request)
     {
-        //
+        Compare::where('id', $request->id)->delete();
+        return response()->json(['success' => 'Wishlist removew success']);
     }
 }
