@@ -52,98 +52,17 @@
                                                 <h5>Tags:</h5>
                                             </li>
                                             @foreach ($news->blogtags as $tag)
-                                                <li><a href="blog-details.html">{{ $tag->tag_name }}</a></li>
+                                                <li>
+                                                    <a
+                                                        href="{{ route('tag.news', $tag->tag_slug) }}">{{ $tag->tag_name }}</a>
+                                                </li>
                                             @endforeach
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="comments-area">
-                            <div class="group-title">
-                                <h4>3 Comments</h4>
-                            </div>
-                            <div class="comment-box">
-                                <div class="comment">
-                                    <figure class="thumb-box">
-                                        <img src="{{ asset('frontend') }}/assets/images/news/comment-1.jpg" alt="">
-                                    </figure>
-                                    <div class="comment-inner">
-                                        <div class="comment-info clearfix">
-                                            <h5>Rebeka Dawson</h5>
-                                            <span>April 10, 2020</span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                                                quis nos trud exerc.</p>
-                                            <a href="blog-details.html"><i class="fas fa-share"></i>Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment replay-comment">
-                                    <figure class="thumb-box">
-                                        <img src="{{ asset('frontend') }}/assets/images/news/comment-2.jpg" alt="">
-                                    </figure>
-                                    <div class="comment-inner">
-                                        <div class="comment-info clearfix">
-                                            <h5>Elizabeth Winstead</h5>
-                                            <span>April 10, 2020</span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Lorem ipsum dolor sit amet, consectur adipisicing elit sed do eiusmod tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis
-                                                nos</p>
-                                            <a href="blog-details.html"><i class="fas fa-share"></i>Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="comment">
-                                    <figure class="thumb-box">
-                                        <img src="{{ asset('frontend') }}/assets/images/news/comment-3.jpg" alt="">
-                                    </figure>
-                                    <div class="comment-inner">
-                                        <div class="comment-info clearfix">
-                                            <h5>Benedict Cumbatch</h5>
-                                            <span>April 10, 2020</span>
-                                        </div>
-                                        <div class="text">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                                                quis nos trud exerc.</p>
-                                            <a href="blog-details.html"><i class="fas fa-share"></i>Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comments-form-area">
-                            <div class="group-title">
-                                <h4>Leave a Comment</h4>
-                            </div>
-                            <form action="blog-details.html" method="post" class="comment-form default-form">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="text" name="name" placeholder="Your name" required="">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="email" name="email" placeholder="Your email" required>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="text" name="phone" placeholder="Phone number" required="">
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
-                                        <input type="text" name="subject" placeholder="Subject" required="">
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                        <textarea name="message" placeholder="Your message"></textarea>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
-                                        <button type="submit" class="theme-btn btn-one">Submit Now</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
@@ -153,24 +72,42 @@
                                 <h4>Search</h4>
                             </div>
                             <div class="search-inner">
-                                <form action="blog-1.html" method="post">
+                                <form action="{{ route('search.news') }}" method="get">
+                                    @csrf
+                                    @method('GET')
                                     <div class="form-group">
-                                        <input type="search" name="search_field" placeholder="Search" required="">
+                                        <input type="search" name="filter[title]" placeholder="Search"
+                                            required="">
                                         <button type="submit"><i class="fas fa-search"></i></button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+                        @php
+                            $url = urlencode(route('news.details', $news->slug)); // news er URL
+                            $title = urlencode($news->title); // news er title
+                        @endphp
+
                         <div class="sidebar-widget social-widget">
                             <div class="widget-title">
                                 <h4>Follow Us On</h4>
                             </div>
                             <ul class="social-links clearfix">
-                                <li><a href="blog-1.html"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="blog-1.html"><i class="fab fa-google-plus-g"></i></a></li>
-                                <li><a href="blog-1.html"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="blog-1.html"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="blog-1.html"><i class="fab fa-instagram"></i></a></li>
+                                <li>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}"><i
+                                            class="fab fa-facebook-f"></i></a>
+                                </li>
+
+                                <li>
+                                    <a
+                                        href="https://twitter.com/intent/tweet?url={{ $url }}&text={{ $title }}"><i
+                                            class="fab fa-twitter"></i> </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url }}"><i
+                                            class="fab fa-linkedin-in"></i></a>
+                                </li>
                             </ul>
                         </div>
                         <div class="sidebar-widget category-widget">
@@ -184,7 +121,7 @@
                                             $bcount = App\Models\BlogPost::where('category_id', $bcategory->id)->get();
                                         @endphp
                                         <li>
-                                            <a href="blog-details.html">{{ $bcategory->category_name }}
+                                            <a href="{{ route('category.news', $bcategory->category_slug) }}">{{ $bcategory->category_name }}
                                                 <span>({{ count($bcount) }})</span>
                                             </a>
                                         </li>
@@ -222,8 +159,8 @@
 
     <!-- subscribe-section -->
     <section class="subscribe-section bg-color-3">
-        <div class="pattern-layer"
-            style="background-image: url({{ asset('frontend') }}/assets/images/shape/shape-2.png);"></div>
+        <div class="pattern-layer" style="background-image: url({{ asset('frontend') }}/assets/images/shape/shape-2.png);">
+        </div>
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-6 col-md-6 col-sm-12 text-column">

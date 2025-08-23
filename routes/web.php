@@ -12,12 +12,22 @@ use App\Http\Controllers\Frontend\FrontendController;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home.index');
     Route::get('/news/details/{slug}', 'newsdetails')->name('news.details');
+    Route::get('/news', 'allnews')->name('all.news');
+    Route::get('/news/category/{category_slug}', 'categorynews')->name('category.news');
+    Route::get('/tag/{tag_slug}', 'tagnews')->name('tag.news');
+    Route::get('/search/news', 'searchnews')->name('search.news');
     Route::get('/property/details/{property_slug}', 'propertydetails')->name('property.details');
     Route::get('/property/category', 'propertycategory')->name('property.category');
     Route::get('/category/{category_slug}', 'categorywiseproperty')->name('category.wise.property');
+    Route::get('/location/{location_slug}', 'locationwiseproperty')->name('location.wise.property');
     Route::get('/our/agent', 'ouragent')->name('our.agent');
     Route::get('/agent/{id}/{username}', 'agendetails')->name('agent.details');
     Route::post('/contact/agent/mesasge', 'contactagentmessage')->name('contact.agent.message')->middleware(['auth', 'verified']);
+
+
+    Route::get('/property', 'propertylist')->name('property.list');
+    Route::get('/search/rent', 'searchrent')->name('search.rent');
+    Route::get('/search/buy', 'searchbuy')->name('search.buy');
 });
 
 // Route::get('/dashboard', function () {

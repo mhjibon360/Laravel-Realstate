@@ -1,5 +1,5 @@
 @extends('frontend.layouts.frontend-master')
-@section('title', 'category wise')
+@section('title', $location->location_slug)
 @section('main')
     <!--Page Title-->
     <section class="page-title-two bg-color-1 centred">
@@ -13,10 +13,10 @@
         </div>
         <div class="auto-container">
             <div class="content-box clearfix">
-                <h1>Category- {{ $categoryproperty->category_name }}</h1>
+                <h1>Location- {{ $location->location_name }}</h1>
                 <ul class="bread-crumb clearfix">
                     <li><a href="{{ route('home.index') }}">Home</a></li>
-                    <li>{{ $categoryproperty->category_slug }}</li>
+                    <li>{{ $location->location_slug }}</li>
                 </ul>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <div class="auto-container">
                     <div class="item-shorting clearfix">
                         <div class="left-column pull-left">
-                            <h5>{{ $categoryproperty->category_name }}: <span>{{ count($categorywiseproperty) }}
+                            <h5>{{ $location->location_name }}: <span>{{ count($locationwiseproperty) }}
                                     property</span></h5>
                         </div>
                         <div class="right-column pull-right clearfix">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="wrapper grid">
                         <div class="deals-list-content list-item">
-                            @foreach ($categorywiseproperty as $property)
+                            @foreach ($locationwiseproperty as $property)
                                 <div class="deals-block-one">
                                     <div class="inner-box">
                                         <div class="image-box">
@@ -123,7 +123,7 @@
                         </div>
                         <div class="deals-grid-content grid-item">
                             <div class="row clearfix">
-                                @foreach ($categorywiseproperty as $property)
+                                @foreach ($locationwiseproperty as $property)
                                     <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
                                         <div class="feature-block-one">
                                             <div class="inner-box">
@@ -172,17 +172,13 @@
                                                             @endif
                                                         </div>
                                                         <ul class="other-option pull-right clearfix">
-                                                            <li>
-                                                                <a type="button" id="{{ $property->id }}"
-                                                                    onclick="addTocompare(this.id)">
-                                                                    <i class="icon-12"></i>
-                                                                </a>
+                                                            <li><a type="button" id="{{ $property->id }}"
+                                                                    onclick="addTocompare(this.id)"><i
+                                                                        class="icon-12"></i></a>
                                                             </li>
-                                                            <li>
-                                                                <a type="button" id="{{ $property->id }}"
-                                                                    onclick="addToWishlist(this.id)">
-                                                                    <i class="icon-13"></i>
-                                                                </a>
+                                                            <li><a type="button" id="{{ $property->id }}"
+                                                                    onclick="addToWishlist(this.id)"><i
+                                                                        class="icon-13"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -205,7 +201,7 @@
                         </div>
                     </div>
                     <div class="pagination-wrapper">
-                        {!! $categorywiseproperty->links('pagination::my-pagination') !!}
+                        {!! $locationwiseproperty->links('pagination::my-pagination') !!}
                     </div>
                 </div>
             </section>

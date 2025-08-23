@@ -57,8 +57,10 @@
                                         @endif
                                     </div>
                                     <ul class="other-option pull-right clearfix">
-                                        <li><a href="property-details.html"><i class="icon-12"></i></a></li>
-                                        <li><a href="property-details.html"><i class="icon-13"></i></a></li>
+                                        <li><a type="button" id="{{ $property->id }}"
+                                                onclick="addTocompare(this.id)"><i class="icon-12"></i></a></li>
+                                        <li><a type="button" id="{{ $property->id }}"
+                                                onclick="addToWishlist(this.id)"><i class="icon-13"></i></a></li>
                                     </ul>
                                 </div>
                                 <p> {!! Str::words(strip_tags($property->property_descriptions), '8', '...') !!}</p>
@@ -67,7 +69,8 @@
                                     <li><i class="icon-15"></i>{{ $property->bath_rooms }} Baths</li>
                                     <li><i class="icon-16"></i>{{ $property->property_size }}</li>
                                 </ul>
-                                <div class="btn-box"><a href="property-details.html" class="theme-btn btn-two">See
+                                <div class="btn-box"><a href="{{ route('property.details', $property->property_slug) }}"
+                                        class="theme-btn btn-two">See
                                         Details</a></div>
                             </div>
                         </div>

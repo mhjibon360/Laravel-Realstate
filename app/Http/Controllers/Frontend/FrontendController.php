@@ -15,10 +15,14 @@ use App\Models\Property;
 use App\Models\Testimonial;
 use App\Models\AgentMessage;
 use App\Models\BlogCategory;
+use App\Models\Propertytype;
 use Illuminate\Http\Request;
 use App\Models\PropertyCategory;
 use App\Http\Controllers\Controller;
+use App\Models\BlogTag;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 
 class FrontendController extends Controller
@@ -39,6 +43,8 @@ class FrontendController extends Controller
         $download = Download::first();
         $allplatform = Platform::all();
         $allnews = BlogPost::with(['blogcategory', 'blogtags', 'users'])->where('status', 1)->latest()->limit(3)->get();
+        $alllocation = Location::all();
+        $allpropertytype = Propertytype::all();
         // return ($allnews);
         return view(
             'frontend.pages.index',
@@ -52,7 +58,9 @@ class FrontendController extends Controller
                 'allagents',
                 'download',
                 'allplatform',
-                'allnews'
+                'allnews',
+                'alllocation',
+                'allpropertytype'
             ])
         );
     }
@@ -102,8 +110,18 @@ class FrontendController extends Controller
     public function categorywiseproperty($category_slug)
     {
         $categoryproperty = propertycategory::where('category_slug', $category_slug)->first();
-        $categorywiseproperty = Property::where('status', 1)->where('category_id', $categoryproperty->id)->latest()->paginate(5);
+        $categorywiseproperty = Property::with(['propertycategory', 'users'])->where('status', 1)->where('category_id', $categoryproperty->id)->latest()->paginate(5);
         return view('frontend.pages.category-wise-propert', compact(['categoryproperty', 'categorywiseproperty']));
+    }
+
+    /**
+     * location wise propety
+     */
+    public function locationwiseproperty($location_slug)
+    {
+        $location = Location::where('location_slug', $location_slug)->first();
+        $locationwiseproperty = Property::with(['propertycategory', 'users'])->where('status', 1)->where('location_id', $location->id)->latest()->paginate(5);
+        return view('frontend.pages.location-wise-propert', compact(['location', 'locationwiseproperty']));
     }
 
     /**
@@ -156,5 +174,91 @@ class FrontendController extends Controller
         } else {
             return redirect()->route('login');
         }
+    }
+
+    /**
+     * search rent
+     */
+    public function searchrent(Request $request)
+    {
+        $properties = QueryBuilder::for(Property::class)
+            ->allowedFilters([
+                AllowedFilter::exact('buy_rent_type'),
+                AllowedFilter::partial('property_name'),
+
+                // belongsTo relation দিয়ে filter
+                AllowedFilter::belongsTo('location_id', 'location'),
+                AllowedFilter::belongsTo('property_id', 'propertyType'),
+            ])
+            ->get();
+
+        return ($properties);
+    }
+
+    /**
+     * search buy for
+     */
+    public function searchbuy(Request $request)
+    {
+        return view('frontend.pages.buy-property', compact('searchbuyproperties'));
+    }
+    /**
+     * property list
+     */
+    public function propertylist()
+    {
+        $allproperty = QueryBuilder::for(Property::class)
+            ->with(['propertycategory', 'users'])
+            ->allowedFilters([
+                AllowedFilter::partial('property_name'), // text search
+                AllowedFilter::exact('location_id'),     // exact match
+                AllowedFilter::exact('propertytype_id'), // exact match
+                AllowedFilter::exact('buy_rent_type'),   // exact match
+            ])
+            ->latest()
+            ->paginate(20);
+
+        return view('frontend.pages.property-list', compact('allproperty'));
+    }
+
+    /**
+     * category news
+     */
+    public function searchnews(Request $request)
+    {
+        $searchkeyword = $request->filter;
+        $searchnews = QueryBuilder::for(BlogPost::class)
+            ->allowedFilters(['title'])
+            ->paginate(20);
+        return view('frontend.pages.dearch-blog', compact(['searchkeyword', 'searchnews']));
+    }
+
+    /**
+     * category news
+     */
+    public function categorynews($category_slug)
+    {
+        $category = BlogCategory::where('category_slug', $category_slug)->first();
+        $categorynews = BlogPost::where('category_id', $category->id)->latest()->paginate(20);
+        return view('frontend.pages.category-blog', compact(['category', 'categorynews']));
+    }
+
+    /**
+     * tag news
+     */
+    public function tagnews($tag_slug)
+    {
+        $tag = BlogTag::where('tag_slug', $tag_slug)->first();
+        $tagnews = $tag->blogposts()->latest()->paginate(20);
+        return view('frontend.pages.tag-blog', compact(['tag', 'tagnews']));
+    }
+
+    /**
+     * all news
+     */
+    public function allnews()
+    {
+        $allblognews = BlogPost::latest()->paginate(20);
+        return view('frontend.pages.all-blog', compact('allblognews'));
     }
 }

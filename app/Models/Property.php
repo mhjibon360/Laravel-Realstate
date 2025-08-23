@@ -17,4 +17,14 @@ class Property extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location_id', 'id');
+    }
+
+    public function propertytype()
+    {
+        return $this->belongsTo(Location::class, 'propertytype_id', 'id');
+    }
 }
