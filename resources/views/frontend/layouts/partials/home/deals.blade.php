@@ -32,16 +32,16 @@
                                     </div>
                                     <div class="buy-btn pull-right">
                                         @if ($property->buy_rent_type == 'buy')
-                                            <a href="property-details.html">For Buy</a>
+                                            <a href="{{ route('property.details', $property->property_slug) }}">For Buy</a>
                                         @else
-                                            <a href="property-details.html">For Rent</a>
+                                            <a href="{{ route('property.details', $property->property_slug) }}">For Rent</a>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="title-text">
                                     <h4>
                                         <a
-                                            href="property-details.html">{{ Str::words($property->property_name, '6', ' ') }}</a>
+                                            href="{{ route('property.details', $property->property_slug) }}">{{ Str::words($property->property_name, '6', ' ') }}</a>
 
                                     </h4>
                                 </div>
@@ -69,7 +69,8 @@
                                     <li><i class="icon-15"></i>{{ $property->bath_rooms }} Baths</li>
                                     <li><i class="icon-16"></i>{{ $property->property_size }}</li>
                                 </ul>
-                                <div class="btn-box"><a href="{{ route('property.details', $property->property_slug) }}"
+                                <div class="btn-box"><a
+                                        href="{{ route('property.details', $property->property_slug) }}"
                                         class="theme-btn btn-two">See
                                         Details</a></div>
                             </div>
