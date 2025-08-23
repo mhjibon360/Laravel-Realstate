@@ -31,6 +31,8 @@
     <link href="{{ asset('frontend') }}/assets/css/switcher-style.css" rel="stylesheet">
     <link href="{{ asset('frontend') }}/assets/css/style.css" rel="stylesheet">
     <link href="{{ asset('frontend') }}/assets/css/responsive.css" rel="stylesheet">
+    <!-- Scripts -->
+    @vite(['resources/js/app.js'])
     @routes()
 </head>
 <!-- page wrapper -->
@@ -102,7 +104,6 @@
 
     <!-- all ajax script-->
     <script>
-
         // limit functin
         function strLimit(text, limit = 100, end = "...") {
             return text.length > limit ? text.substring(0, limit) + end : text;
@@ -184,11 +185,11 @@
                                                     <h6>Start From</h6>
                                                     ${value.property.discount_price
                                                     ? ` <h4>$${value.property.discount_price}</h4>
-                                                                                    <h4 class="text-secondary"><del>$${value.property.price}</del></h4>`
+                                                                                            <h4 class="text-secondary"><del>$${value.property.price}</del></h4>`
                                                     :`
-                                                                                     <h4>$${value.property.price}</h4>
+                                                                                             <h4>$${value.property.price}</h4>
 
-                                                                                    `
+                                                                                            `
                                                     }
 
                                                 </div>
@@ -221,8 +222,8 @@
                             </div>
 
                     `;
-                });
-                $('#wishlist_holder').html(wishlist);
+                    });
+                    $('#wishlist_holder').html(wishlist);
                 }
             });
         }
@@ -230,7 +231,7 @@
 
         // remove to wishlis
         function removeWishlist(id) {
-           $.ajax({
+            $.ajax({
                 type: "POST",
                 url: route('wishlist.remove'),
                 data: {
@@ -346,11 +347,11 @@
                                                     <h6>Start From</h6>
                                                     ${value.property.discount_price
                                                     ? ` <h4>$${value.property.discount_price}</h4>
-                                                                                    <h4 class="text-secondary"><del>$${value.property.price}</del></h4>`
+                                                                                            <h4 class="text-secondary"><del>$${value.property.price}</del></h4>`
                                                     :`
-                                                                                     <h4>$${value.property.price}</h4>
+                                                                                             <h4>$${value.property.price}</h4>
 
-                                                                                    `
+                                                                                            `
                                                     }
 
                                                 </div>
@@ -383,8 +384,8 @@
                             </div>
 
                     `;
-                });
-                $('#compare_holder').html(compare);
+                    });
+                    $('#compare_holder').html(compare);
                 }
             });
         }
@@ -392,7 +393,7 @@
 
         // remove to compare
         function removeCompare(id) {
-           $.ajax({
+            $.ajax({
                 type: "POST",
                 url: route('compare.remove'),
                 data: {
@@ -428,8 +429,6 @@
                 }
             });
         }
-
-
     </script>
     <!-- all ajax script end-->
 

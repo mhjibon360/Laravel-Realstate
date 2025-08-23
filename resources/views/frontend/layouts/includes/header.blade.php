@@ -29,7 +29,7 @@
             <div class="outer-box">
                 <div class="main-box">
                     <div class="logo-box">
-                        <figure class="logo"><a href="index.html"><img
+                        <figure class="logo"><a href="{{ route('home.index') }}"><img
                                     src="{{ asset('frontend') }}/assets/images/logo.png" alt=""></a>
                         </figure>
                     </div>
@@ -43,29 +43,12 @@
                         <nav class="main-menu navbar-expand-md navbar-light">
                             <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                    <li class="current dropdown"><a href="index.html"><span>Home</span></a>
+                                    <li><a href="{{ route('home.index') }}"><span>Home</span></a></li>
+                                    <li class="dropdown"><a href="{{ route('home.index') }}"><span>Listing</span></a>
                                         <ul>
-                                            <li><a href="index.html">Main Home</a></li>
-                                            <li><a href="index-2.html">Home Modern</a></li>
-                                            <li><a href="index-3.html">Home Map</a></li>
-                                            <li><a href="index-4.html">Home Half Map</a></li>
-                                            <li><a href="index-5.html">Home Agent</a></li>
-                                            <li><a href="index-onepage.html">OnePage Home</a></li>
-                                            <li><a href="index-rtl.html">RTL Home</a></li>
-                                            <li class="dropdown"><a href="index.html">Header Style</a>
-                                                <ul>
-                                                    <li><a href="index.html">Header Style 01</a></li>
-                                                    <li><a href="index-2.html">Header Style 02</a></li>
-                                                    <li><a href="index-3.html">Header Style 03</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown"><a href="index.html"><span>Listing</span></a>
-                                        <ul>
-                                            <li><a href="agents-list.html">Agents List</a></li>
-                                            <li><a href="agents-grid.html">Agents Grid</a></li>
-                                            <li><a href="agents-details.html">Agent Details</a></li>
+                                            <li><a href="{{ route('our.agent') }}">Agents List</a></li>
+                                            <li><a href="{{ route('property.list') }}">Property List</a></li>
+                                            <li><a href="{{ route('all.news') }}">News/Blog List</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown"><a href="index.html"><span>Property</span></a>
