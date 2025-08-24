@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Agent\PricingController;
 use App\Http\Controllers\Agent\PropertyController;
 
 require __DIR__ . '/auth.php';
@@ -33,4 +34,7 @@ Route::middleware(['auth', 'verified', 'role:agent'])->group(function () {
         Route::get('/change/property/status', 'propertystatus')->name('property.status');
     });
     Route::resource('/property', PropertyController::class);
+    Route::controller(PricingController::class)->group(function () {
+        Route::get('/buy-plan', 'allplan')->name('all.plan');
+    });
 });
