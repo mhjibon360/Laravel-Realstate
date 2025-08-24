@@ -18,41 +18,36 @@
                      <span class="link-title">Dashboard</span>
                  </a>
              </li>
-             <li class="nav-item nav-category">web apps</li>
+             <li class="nav-item nav-category">property</li>
+
              <li class="nav-item">
-                 <a class="nav-link" data-bs-toggle="collapse" href="#emails" role="button" aria-expanded="false"
-                     aria-controls="emails">
+                 <a class="nav-link" data-bs-toggle="collapse" href="#property" role="button" aria-expanded="false"
+                     aria-controls="property">
                      <i class="link-icon" data-feather="mail"></i>
-                     <span class="link-title">Email</span>
+                     <span class="link-title">Manage Poroperty </span>
                      <i class="link-arrow" data-feather="chevron-down"></i>
                  </a>
-                 <div class="collapse" id="emails">
+                 <div class="collapse" id="property">
                      <ul class="nav sub-menu">
                          <li class="nav-item">
-                             <a href="pages/email/inbox.html" class="nav-link">Inbox</a>
+                             <a href="{{ route('agent.property.create') }}" class="nav-link">
+                                 Add Poroperty </a>
                          </li>
                          <li class="nav-item">
-                             <a href="pages/email/read.html" class="nav-link">Read</a>
+                             <a href="{{ route('agent.property.index') }}" class="nav-link">
+                                 All Poroperty </a>
                          </li>
                          <li class="nav-item">
-                             <a href="pages/email/compose.html" class="nav-link">Compose</a>
+                             <a href="{{ route('agent.active.property') }}" class="nav-link">
+                                 Active Poroperty </a>
+                         </li>
+                         <li class="nav-item">
+                             <a href="{{ route('agent.deactive.property') }}" class="nav-link">
+                                 Deactive Poroperty </a>
                          </li>
                      </ul>
                  </div>
              </li>
-             <li class="nav-item">
-                 <a href="pages/apps/chat.html" class="nav-link">
-                     <i class="link-icon" data-feather="message-square"></i>
-                     <span class="link-title">Chat</span>
-                 </a>
-             </li>
-             <li class="nav-item">
-                 <a href="pages/apps/calendar.html" class="nav-link">
-                     <i class="link-icon" data-feather="calendar"></i>
-                     <span class="link-title">Calendar</span>
-                 </a>
-             </li>
-             <li class="nav-item nav-category">Components</li>
 
          </ul>
      </div>

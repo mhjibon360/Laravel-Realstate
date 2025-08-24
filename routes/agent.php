@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Agent\PropertyController;
 
 require __DIR__ . '/auth.php';
 
@@ -22,4 +23,14 @@ Route::middleware(['auth', 'verified', 'role:agent'])->group(function () {
         Route::put('/update/password', 'updatepassword')->name('update.password');
         Route::post('/logout', 'agentlogout')->name('logout');
     });
+
+    // property all routes
+    Route::controller(PropertyController::class)->group(function () {
+        Route::get('/active/property', 'activeproperty')->name('active.property');
+        Route::get('/deactive/property', 'deactiveproperty')->name('deactive.property');
+        Route::get('/change/hot/property/status', 'hotproperty')->name('hot.property.status');
+        Route::get('/change/featured/property/status', 'featuredproperty')->name('featured.property.status');
+        Route::get('/change/property/status', 'propertystatus')->name('property.status');
+    });
+    Route::resource('/property', PropertyController::class);
 });

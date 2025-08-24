@@ -9,7 +9,7 @@
     <meta name="author" content="NobleUI">
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>agent | @yield('title')</title>
 
     <!-- Fonts -->
@@ -17,13 +17,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- End fonts -->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- core:css -->
     <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/core/core.css">
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.css">
+    <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.css">
+    <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('agent') }}/assets/vendors/dropify/dist/dropify.min.css">
+    <link rel="stylesheet" href="{{ asset('agent/assets/css/fileUpload.css') }}">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
@@ -37,6 +47,7 @@
 
     <link rel="shortcut icon" href="{{ asset('agent') }}/assets/images/favicon.png" />
     @stack('agent_style')
+    @routes
 </head>
 
 <body>
@@ -80,8 +91,15 @@
     <!-- endinject -->
 
     <!-- Plugin js for this page -->
-    <script src="{{ asset('agent') }}/assets/vendors/flatpickr/flatpickr.min.js"></script>
-    <script src="{{ asset('agent') }}/assets/vendors/apexcharts/apexcharts.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/flatpickr/flatpickr.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/jquery-tags-input/jquery.tagsinput.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/tinymce/tinymce.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/vendors/dropify/dist/dropify.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->
@@ -92,6 +110,19 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('agent') }}/assets/js/dashboard-dark.js"></script>
     <!-- End custom js for this page -->
+    <script src="{{ asset('agent') }}/assets/js/data-table.js"></script>
+    <script src="{{ asset('agent') }}/assets/js/sweet-alert.js"></script>
+    <script src="{{ asset('agent') }}/assets/js/tags-input.js"></script>
+    <script src="{{ asset('agent') }}/assets/js/select2.js"></script>
+    <script src="{{ asset('agent') }}/assets/js/tinymce.js"></script>
+    <script src="{{ asset('agent') }}/assets/js/dropify.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @stack('agent_script')
 </body>
 

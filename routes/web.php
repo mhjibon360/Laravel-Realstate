@@ -21,7 +21,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/category/{category_slug}', 'categorywiseproperty')->name('category.wise.property');
     Route::get('/location/{location_slug}', 'locationwiseproperty')->name('location.wise.property');
     Route::get('/our/agent', 'ouragent')->name('our.agent');
-    Route::get('/agent/{id}/{username}', 'agendetails')->name('agent.details');
+    Route::get('/details/agent/{id}/{username}', 'agendetails')->name('agent.details');
     Route::post('/contact/agent/mesasge', 'contactagentmessage')->name('contact.agent.message')->middleware(['auth', 'verified']);
 
 
