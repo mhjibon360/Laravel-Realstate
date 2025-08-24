@@ -1,6 +1,6 @@
-@extends('backend.layouts.backend-master')
+@extends('agent.layouts.agent-master')
 @section('title', 'all active property list')
-@section('content')
+@section('agent_content')
     <nav class="page-breadcrumb ">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript::void();">Property</a></li>
@@ -76,10 +76,10 @@
                                             </td>
                                             <td>{{ $item->created_at->format('d-M-Y') }}</td>
                                             <td>
-                                                <a href="{{ route('admin.property.edit', $item->id) }}"
+                                                <a href="{{ route('agent.property.edit', $item->id) }}"
                                                     class="btn btn-inverse-warning mb-1 mb-md-0"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
-                                                <form action="{{ route('admin.property.destroy', $item->id) }}"
+                                                <form action="{{ route('agent.property.destroy', $item->id) }}"
                                                     method="post" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
@@ -88,7 +88,7 @@
                                                             class="fa-solid fa-trash"></i></button>
                                                 </form>
 
-                                                <a href="{{ route('admin.property.show', $item->id) }}"
+                                                <a href="{{ route('agent.property.show', $item->id) }}"
                                                     class="btn btn-inverse-info mb-1 mb-md-0"><i
                                                         class="fa-solid fa-eye"></i></a>
                                             </td>
@@ -105,7 +105,7 @@
 
     </div>
 @endsection
-@push('admin_script')
+@push('agent_script')
     <script>
         $(document).ready(function() {
             $('.delete_btn').click(function(e) {
@@ -156,7 +156,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: route('admin.hot.property.status'),
+                    url: route('agent.hot.property.status'),
                     data: {
                         hot: hot,
                         id: id,
@@ -201,7 +201,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: route('admin.featured.property.status'),
+                    url: route('agent.featured.property.status'),
                     data: {
                         featured: featured,
                         id: id,
@@ -244,7 +244,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: route('admin.property.status'),
+                    url: route('agent.property.status'),
                     data: {
                         status: status,
                         id: id,

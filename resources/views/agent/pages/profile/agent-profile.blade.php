@@ -44,8 +44,8 @@
                         </div>
                         <div class="d-none d-md-block">
                             <button class="btn btn-primary btn-icon-text">
-                                <i data-feather="edit" class="btn-icon-prepend"></i>
-                                profile
+                                <i data-feather="slack" class="btn-icon-prepend"></i>
+                                {{ Auth::user()->credit }}
                             </button>
                         </div>
                     </div>

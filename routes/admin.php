@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\MultiimageController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogTagController;
+use App\Http\Controllers\Backend\PricingController;
 use App\Http\Controllers\Backend\PropertytypeController;
 use App\Http\Controllers\Backend\PropertyCategoryController;
 
@@ -135,4 +136,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         Route::get('/add/account', 'addaccount')->name('add.account');
         Route::post('/store/account', 'storeaccount')->name('store.account');
     });
+
+    Route::resource('package-plan', PricingController::class);
 });

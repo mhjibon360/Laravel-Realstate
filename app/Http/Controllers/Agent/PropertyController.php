@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Models\User;
 use App\Models\Nearby;
 use App\Models\Location;
 use App\Models\Property;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\Propertytype;
 use Illuminate\Http\Request;
 use App\Models\PropertyCategory;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +22,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $allproperty = Property::latest()->get();
+        $allproperty = Property::where('user_id', Auth::id())->latest()->get();
         return view('agent.pages.property.index', compact('allproperty'));
     }
 
@@ -29,7 +31,7 @@ class PropertyController extends Controller
      */
     public function activeproperty()
     {
-        $allproperty = Property::where('status', 1)->latest()->get();
+        $allproperty = Property::where('user_id', Auth::id())->where('status', 1)->latest()->get();
         return view('agent.pages.property.active-property', compact('allproperty'));
     }
     /**
@@ -37,7 +39,7 @@ class PropertyController extends Controller
      */
     public function deactiveproperty()
     {
-        $allproperty = Property::where('status', 0)->get();
+        $allproperty = Property::where('user_id', Auth::id())->where('status', 0)->get();
         return view('agent.pages.property.deactive-property', compact('allproperty'));
     }
 
@@ -158,6 +160,13 @@ class PropertyController extends Controller
                     'created_at' => now(),
                 ]);
             }
+        }
+
+
+        if ($pid) {
+            User::where('id', Auth::id())->update([
+                'credit' => DB::raw('credit-1'),
+            ]);
         }
 
         // notification
