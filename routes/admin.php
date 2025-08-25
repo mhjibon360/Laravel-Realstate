@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\Backend\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\NearbyController;
+use App\Http\Controllers\Backend\AccountController;
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\BlogTagController;
+use App\Http\Controllers\Backend\PricingController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\BlogPostController;
 use App\Http\Controllers\Backend\ChooseusController;
 use App\Http\Controllers\Backend\DownloadController;
@@ -16,8 +19,6 @@ use App\Http\Controllers\Backend\FloorplanController;
 use App\Http\Controllers\Backend\MultiimageController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\BlogCategoryController;
-use App\Http\Controllers\Backend\BlogTagController;
-use App\Http\Controllers\Backend\PricingController;
 use App\Http\Controllers\Backend\PropertytypeController;
 use App\Http\Controllers\Backend\PropertyCategoryController;
 
@@ -138,4 +139,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     });
 
     Route::resource('package-plan', PricingController::class);
+
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('/setting', 'generalsetting')->name('general.setting');
+        Route::put('/general-setting-update', 'generalsettingupdate')->name('general.setting.update');
+        Route::put('/seo-setting-update', 'seosettingupdate')->name('seo.setting.update');
+    });
 });

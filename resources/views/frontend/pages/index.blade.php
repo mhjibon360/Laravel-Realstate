@@ -27,7 +27,7 @@
 
 
     <!-- testimonial-section end -->
-    @include('frontend.layouts.partials.home.testimonial')
+    @include('frontend.layouts.partials.global.testimonial')
     <!-- testimonial-section end -->
 
 
@@ -42,7 +42,7 @@
 
 
     <!-- team-section -->
-    @include('frontend.layouts.partials.home.team')
+    @include('frontend.layouts.partials.global.team')
     <!-- team-section end -->
 
 
@@ -57,7 +57,7 @@
 
 
     <!-- download-section -->
-    @include('frontend.layouts.partials.home.download')
+    @include('frontend.layouts.partials.global.download')
     <!-- download-section end -->
 
 @endsection

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Agent\AgentController;
+use App\Http\Controllers\Agent\CheckoutController;
 use App\Http\Controllers\Agent\PricingController;
 use App\Http\Controllers\Agent\PropertyController;
 
@@ -34,7 +35,14 @@ Route::middleware(['auth', 'verified', 'role:agent'])->group(function () {
         Route::get('/change/property/status', 'propertystatus')->name('property.status');
     });
     Route::resource('/property', PropertyController::class);
+
     Route::controller(PricingController::class)->group(function () {
         Route::get('/buy-plan', 'allplan')->name('all.plan');
+        Route::get('/package-purchase/history', 'purchasehistory')->name('package.purchase.history');
+    });
+    Route::controller(CheckoutController::class)->group(function () {
+        Route::get('/buy-package/{id}/{package_name}', 'checkout')->name('price.plan.checkout');
+        Route::post('/stripe/checkout', 'stripecheckout')->name('stripe.checkout');
+        Route::post('/stripe/payment', 'stripepayment')->name('stripe.payment');
     });
 });

@@ -23,7 +23,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/our/agent', 'ouragent')->name('our.agent');
     Route::get('/details/agent/{id}/{username}', 'agendetails')->name('agent.details');
     Route::post('/contact/agent/mesasge', 'contactagentmessage')->name('contact.agent.message')->middleware(['auth', 'verified']);
-
+    Route::get('/about', 'about')->name('about.us');
+    Route::get('/contact', 'contact')->name('contact.us');
 
     Route::get('/property', 'propertylist')->name('property.list');
     Route::get('/search/rent', 'searchrent')->name('search.rent');

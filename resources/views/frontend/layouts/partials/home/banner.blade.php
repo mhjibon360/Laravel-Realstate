@@ -76,7 +76,7 @@
                          <div class="tab" id="tab-2">
                              <div class="inner-box">
                                  <div class="top-search">
-                                   <form action="{{ route('property.list') }}" method="get" class="search-form">
+                                     <form action="{{ route('property.list') }}" method="get" class="search-form">
                                          @csrf
                                          @method('GET')
                                          <input type="hidden" value="rent" name="filter[buy_rent_type]">

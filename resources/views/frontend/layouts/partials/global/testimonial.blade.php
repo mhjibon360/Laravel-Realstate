@@ -1,3 +1,6 @@
+@php
+    $alltestimonials = App\Models\Testimonial::where('status', 1)->latest()->get();
+@endphp
  <section class="testimonial-section bg-color-1 centred">
      <div class="pattern-layer" style="background-image: url({{ asset('frontend') }}/assets/images/shape/shape-1.png);">
      </div>

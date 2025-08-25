@@ -1,3 +1,6 @@
+@php
+     $allagents =App\Models\User::where('status', 1)->where('role', 'agent')->latest()->get();
+@endphp
  <section class="team-section sec-pad centred bg-color-1">
      <div class="pattern-layer" style="background-image: url({{ asset('frontend') }}/assets/images/shape/shape-1.png);">
      </div>

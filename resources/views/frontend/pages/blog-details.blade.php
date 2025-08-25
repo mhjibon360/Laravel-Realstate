@@ -76,8 +76,7 @@
                                     @csrf
                                     @method('GET')
                                     <div class="form-group">
-                                        <input type="search" name="filter[title]" placeholder="Search"
-                                            required="">
+                                        <input type="search" name="filter[title]" placeholder="Search" required="">
                                         <button type="submit"><i class="fas fa-search"></i></button>
                                     </div>
                                 </form>

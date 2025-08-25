@@ -131,10 +131,11 @@
                                                     </tr>
                                                 </table>
                                                 <div class="d-grid">
-                                                    <button class="delete_btn btn text-white  mt-4"
+                                                    <a href="{{ route('agent.price.plan.checkout', ['id' => $item->id, 'package_name' => $item->package_name]) }}"
+                                                        class="delete_btn btn text-white  mt-4"
                                                         style="background: {{ $item->package_cardcolor }}; border:{{ $item->package_cardcolor }}">
                                                         Buy Package
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

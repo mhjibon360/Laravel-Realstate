@@ -36,12 +36,8 @@ class FrontendController extends Controller
         $banner = Banner::first();
         $propertycatgorys = PropertyCategory::latest()->limit(5)->get();
         $video = Video::first();
-        $alltestimonials = Testimonial::where('status', 1)->latest()->get();
         $chooseusall = ChooseUs::all();
         $allplaces = Location::orderBy('id', 'asc')->limit(4)->get();
-        $allagents = User::where('status', 1)->where('role', 'agent')->latest()->get();
-        $download = Download::first();
-        $allplatform = Platform::all();
         $allnews = BlogPost::with(['blogcategory', 'blogtags', 'users'])->where('status', 1)->latest()->limit(3)->get();
         $alllocation = Location::all();
         $allpropertytype = Propertytype::all();
@@ -52,12 +48,8 @@ class FrontendController extends Controller
                 'banner',
                 'propertycatgorys',
                 'video',
-                'alltestimonials',
                 'chooseusall',
                 'allplaces',
-                'allagents',
-                'download',
-                'allplatform',
                 'allnews',
                 'alllocation',
                 'allpropertytype'
@@ -260,5 +252,23 @@ class FrontendController extends Controller
     {
         $allblognews = BlogPost::latest()->paginate(20);
         return view('frontend.pages.all-blog', compact('allblognews'));
+    }
+
+    /**
+     * about us
+     */
+    public function about()
+    {
+        $banner = Banner::first();
+        return view('frontend.pages.about',compact('banner'));
+    }
+
+    /**
+     * contact us
+     */
+    public function contact()
+    {
+        $banner = Banner::first();
+        return view('frontend.pages.contact',compact('banner'));
     }
 }

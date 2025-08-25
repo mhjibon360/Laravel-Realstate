@@ -25,6 +25,12 @@
                      <span class="link-title">Buy Package</span>
                  </a>
              </li>
+             <li class="nav-item">
+                 <a href="{{ route('agent.package.purchase.history') }}" class="nav-link">
+                     <i class="link-icon" data-feather="box"></i>
+                     <span class="link-title">PUrchase History</span>
+                 </a>
+             </li>
              <li class="nav-item nav-category">property</li>
 
              <li class="nav-item">
