@@ -22,7 +22,6 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/location/{location_slug}', 'locationwiseproperty')->name('location.wise.property');
     Route::get('/our/agent', 'ouragent')->name('our.agent');
     Route::get('/details/agent/{id}/{username}', 'agendetails')->name('agent.details');
-    Route::post('/contact/agent/mesasge', 'contactagentmessage')->name('contact.agent.message')->middleware(['auth', 'verified']);
     Route::get('/about', 'about')->name('about.us');
     Route::get('/contact', 'contact')->name('contact.us');
 
@@ -52,6 +51,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::get('/change/password', 'changepassword')->name('change.password');
         Route::put('/update/password', 'updatepassword')->name('update.password');
+
+        Route::post('/send/message', 'sendmessage')->name('send.message');
+        Route::post('/contact/agent/mesasge', 'contactagentmessage')->name('contact.agent.message')->middleware(['auth', 'verified']);
     });
 });
 

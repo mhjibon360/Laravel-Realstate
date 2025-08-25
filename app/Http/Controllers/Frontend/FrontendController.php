@@ -140,33 +140,7 @@ class FrontendController extends Controller
         return view('frontend.pages.agnet-profile', compact(['agent', 'agentproperty', 'mayyoulikes', 'forpropertycount', 'buypropertycount']));
     }
 
-    /**
-     * contact agent message
-     */
-    public function contactagentmessage(Request $request)
-    {
 
-        if (Auth::check()) {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required',
-                'phone' => 'required',
-                'message' => 'required',
-            ]);
-
-            AgentMessage::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'message' => $request->message,
-            ]);
-            // notification
-            notyf()->success('Thanks for your contact message');
-            return back();
-        } else {
-            return redirect()->route('login');
-        }
-    }
 
     /**
      * search rent

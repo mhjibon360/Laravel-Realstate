@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
+use App\Models\AgentMessage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -98,6 +100,69 @@ class UserConroller extends Controller
         } else {
             // notification
             notyf()->error('current password doesn\'t match our record');
+            return back();
+        }
+    }
+
+
+    /**
+     * contact agent message
+     */
+    public function contactagentmessage(Request $request)
+    {
+
+        if (Auth::check()) {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'message' => 'required',
+            ]);
+
+            AgentMessage::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'message' => $request->message,
+            ]);
+            // notification
+            notyf()->success('Thanks for your contact');
+            return back();
+        } else {
+            return redirect()->route('login');
+        }
+    }
+
+
+    /**
+     * send contact message
+     */
+    public function sendmessage(Request $request)
+    {
+        if (Auth::check()) {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'subject' => 'required',
+                'message' => 'required',
+            ]);
+
+            ContactMessage::insert([
+                'user_id' => Auth::check(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'subject' => $request->subject,
+                'message' => $request->message,
+                'name' => $request->name,
+                'created_at' => now(),
+            ]);
+            // notification
+            notyf()->success('Thanks for your contact message');
+            return back();
+        } else {
+            notyf()->error('Please sing to send message');
             return back();
         }
     }
